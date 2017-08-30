@@ -6,7 +6,8 @@
   "scripts": {
     "start": "",
     "build": "",
-    "watch": ""
+    "watch": "",
+    "storybook": "start-storybook -p 9001 -c .storybook"
   },
   "repository": {
     "type": "git",
@@ -18,5 +19,18 @@
   "bugs": {
     "url": "https://github.com/21-23/cssqd-ui/issues"
   },
-  "homepage": "https://github.com/21-23/cssqd-ui#readme"
+  "homepage": "https://github.com/21-23/cssqd-ui#readme",
+  "dependencies": {
+    "preact": "^8.2.5"
+  },
+  "devDependencies": {
+    "@storybook/react": "^3.2.8",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "preact-compat": "^3.17.0",
+    "styled-jsx": "^1.0.10",
+    "url-loader": "^0.5.9",
+    "webpack": "^3.5.5"
+  }
 }
