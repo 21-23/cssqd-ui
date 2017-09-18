@@ -1,6 +1,6 @@
 {
-  "plugins": [
-    ["transform-react-jsx", { "pragma": "h" }],
-    "styled-jsx/babel"
-  ]
+    "plugins": [
+        ["transform-react-jsx", { "pragma": "h" }],
+        "styled-jsx/babel"
+    ]
 }
