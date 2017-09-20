@@ -1,15 +1,13 @@
 import { h } from 'preact';
 import Icon from 'react-fontawesome';
 
-const backgroundImage = require('../../assets/images/header-bg.png');
-
-const Header = ({ username }) => (
-    <header>
-        <span>CSS Quickdraw</span>
+const Header = ({ productName, username, style }) => (
+    <header style={style}>
+        <span>{ productName }</span>
 
         <span>
             <Icon name="user" className="user-icon" />
-            {username}
+            { username }
         </span>
         <style jsx>{`
             header {
@@ -17,7 +15,6 @@ const Header = ({ username }) => (
                 flex: 1;
                 display: flex;
                 justify-content: space-between;
-                background-image: url(${backgroundImage});
                 background-size: auto 100%;
                 color: white;
                 box-sizing: border-box;

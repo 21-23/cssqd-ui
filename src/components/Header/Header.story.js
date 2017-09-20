@@ -4,7 +4,15 @@ import { text } from '@storybook/addon-knobs';
 
 import { Header } from './Header';
 
+const backgroundImageUrl = require('../../assets/images/header-bg.png');
+
 storiesOf('Header', module)
     .add('default', () => (
-        <Header username={text('username', 'username')}/>
+        <Header
+            productName={text('productName', 'CSS Quickdraw')}
+            username={text('username', 'username')}
+            style={{
+                backgroundImage: `url(${backgroundImageUrl})`,
+            }}
+        />
     ));
