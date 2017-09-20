@@ -28,6 +28,8 @@
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-plugin-transform-react-jsx": "^6.24.1",
+    "common-tags": "^1.4.0",
+    "inquirer": "^3.3.0",
     "preact-compat": "^3.17.0",
     "styled-jsx": "^1.0.10",
     "url-loader": "^0.5.9",
