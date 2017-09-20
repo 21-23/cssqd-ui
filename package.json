@@ -21,9 +21,11 @@
   },
   "homepage": "https://github.com/21-23/cssqd-ui#readme",
   "dependencies": {
-    "preact": "^8.2.5"
+    "preact": "^8.2.5",
+    "react-fontawesome": "^1.6.1"
   },
   "devDependencies": {
+    "@storybook/addon-knobs": "^3.2.8",
     "@storybook/react": "^3.2.8",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
