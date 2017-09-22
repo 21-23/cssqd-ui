@@ -1,8 +1,8 @@
 import { h } from 'preact';
 import Icon from 'react-fontawesome';
 
-const Header = ({ productName, username, style }) => (
-    <header style={style}>
+const Header = ({ productName, username, backgroundImageUrl }) => (
+    <header style={{ backgroundImage: `url(${backgroundImageUrl})` }}>
         <span>{ productName }</span>
 
         <span>

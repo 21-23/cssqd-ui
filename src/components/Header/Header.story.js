@@ -11,8 +11,6 @@ storiesOf('Header', module)
         <Header
             productName={text('productName', 'CSS Quickdraw')}
             username={text('username', 'username')}
-            style={{
-                backgroundImage: `url(${backgroundImageUrl})`,
-            }}
+            backgroundImageUrl={backgroundImageUrl}
         />
     ));
