@@ -11,8 +11,6 @@ addDecorator(story => (
 ));
 addDecorator(withKnobs);
 
-addDecorator(withKnobs);
-
 function loadStories() {
     require('./stories');
 }
