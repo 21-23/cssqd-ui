@@ -21,15 +21,34 @@ class Countdown extends Component {
         // retina magic end
 
         this._update(this.props);
-        this._render(this.props);
+        this._render();
     }
 
     componentWillReceiveProps(nextProps) {
+        const prevProgress = this.progress;
         this._update(nextProps);
-        this._render(nextProps);
+
+        const newProgress = this.progress;
+
+        if (nextProps.timeRemaining === nextProps.timeAmount) {
+            this._render();
+        } else {
+            this._animate({
+                from: prevProgress,
+                to: newProgress,
+                duration: 1000,
+            }, v => {
+                this.progress = v;
+                this._render();
+            });
+        }
     }
 
-    _update({ size, strokeSize, textFillColor }) {
+    componentWillUnmount() {
+        this._stopAnimation();
+    }
+
+    _update({ size, strokeSize, textFillColor, timeRemaining, timeAmount, arcColor, remainingTimeArcColor }) {
         this.size = size * this.ratio;
         this.strokeSize = strokeSize * this.ratio;
 
@@ -46,37 +65,50 @@ class Countdown extends Component {
 
         this.ctx.textBaseline = 'middle'
         this.ctx.lineCap = 'round';
+
+        this.text = this._formatText(timeRemaining);
+        const { width } = this.ctx.measureText(this.text);
+
+        this.textX = (this.size - width) / 2;
+        this.textY = this.size / 2;
+
+        this.progress = timeRemaining / timeAmount;
+
+        this.arcColor = arcColor;
+        this.remainingTimeArcColor = remainingTimeArcColor;
     }
 
     _clear() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
 
-    _render({ size, fontSize, arcColor, remainingTimeArcColor, timeAmount, timeRemaining }) {
+    _render = () => {
         this._clear();
-        this._renderText({ timeRemaining });
+        this._renderText();
+        this._renderBackgroundCircle();
+        this._renderRemainingTimeArc();
+    }
 
-        this.ctx.strokeStyle = arcColor;
+    _renderBackgroundCircle() {
+        this.ctx.strokeStyle = this.arcColor;
         this._renderArc({ progress: 1 });
+    }
 
-        this.ctx.strokeStyle = remainingTimeArcColor;
+    _renderRemainingTimeArc() {
+        this.ctx.strokeStyle = this.remainingTimeArcColor;
         this._renderArc({
-            progress: timeRemaining / timeAmount,
+            progress: this.progress,
             clockwise: true,
         });
     }
 
-    _renderText({ timeRemaining }) {
-        const text = this._formatText(timeRemaining);
-        const { width } = this.ctx.measureText(text);
-        const textX = (this.size - width) / 2;
-        const textY = this.size / 2;
-
-        this.ctx.fillText(text, textX, textY);
+    _renderText() {
+        this.ctx.fillText(this.text, this.textX, this.textY);
     }
 
     _renderArc({ progress, clockwise }) {
         this.ctx.beginPath();
+
         this.ctx.arc(
             this.center,
             this.center,
@@ -85,6 +117,7 @@ class Countdown extends Component {
             !clockwise
         );
         this.ctx.stroke();
+
         this.ctx.closePath();
     }
 
@@ -93,6 +126,41 @@ class Countdown extends Component {
         const seconds = timeRemaining - (minutes * 60);
 
         return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    }
+
+    _animate({ from, to, duration }, animationCallback) {
+        this._stopAnimation();
+
+        this.animationDuration = duration;
+        this.animationStart = Date.now();
+        this.animationValueDiff = to - from;
+        this.animationFromValue = from;
+        this.animationCallback = animationCallback;
+
+        this._animationNextFrame();
+    }
+
+    _animationNextFrame = () => {
+        const now = Date.now();
+        let progress = (now - this.animationStart) / this.animationDuration;
+
+        if (progress > 1) {
+            progress = 1;
+        }
+
+        const v = this.animationFromValue + this.animationValueDiff * progress;
+
+        this.animationCallback(v);
+
+        if (progress < 1) {
+            this.animationRaf = requestAnimationFrame(this._animationNextFrame);
+        }
+    }
+
+    _stopAnimation() {
+        if (this.animationRaf) {
+            cancelAnimationFrame(this.animationRaf);
+        }
     }
 }
 
