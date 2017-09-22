@@ -9,6 +9,7 @@ addDecorator(story => (
         { story() }
     </Layout>
 ));
+addDecorator(withKnobs);
 
 addDecorator(withKnobs);
 
