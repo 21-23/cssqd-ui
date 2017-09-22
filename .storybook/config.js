@@ -10,7 +10,7 @@ addDecorator(story => (
 ));
 
 function loadStories() {
-    require('../src/components/Header/Header.story')
+    require('./stories');
 }
 
 configure(loadStories, module);
