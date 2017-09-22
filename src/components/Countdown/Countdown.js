@@ -52,14 +52,14 @@ class Countdown extends Component {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
 
-    _render({ size, fontSize, arcColor, remainigTimeArcColor, timeAmount, timeRemaining }) {
+    _render({ size, fontSize, arcColor, remainingTimeArcColor, timeAmount, timeRemaining }) {
         this._clear();
         this._renderText({ timeRemaining });
 
         this.ctx.strokeStyle = arcColor;
         this._renderArc({ progress: 1 });
 
-        this.ctx.strokeStyle = remainigTimeArcColor;
+        this.ctx.strokeStyle = remainingTimeArcColor;
         this._renderArc({
             progress: timeRemaining / timeAmount,
             clockwise: true,

@@ -11,9 +11,9 @@ storiesOf('Countdown', module)
             strokeSize={number('strokeSize', 10)}
             textFillColor={color('textFillColor', '#f8d940')}
             arcColor={color('arcColor', '#75a096')}
-            remainigTimeArcColor={color('remainigTimeArcColor', '#f8d940')}
+            remainingTimeArcColor={color('remainingTimeArcColor', '#f8d940')}
             timeAmount={number('timeAmount', 120)}
-            timeRemaining={number('timeRemainig', 120)}
+            timeRemaining={number('timeRemaining', 120)}
         />
     ))
     .add('some time elapsed', () => (
@@ -22,9 +22,9 @@ storiesOf('Countdown', module)
             strokeSize={number('strokeSize', 10)}
             textFillColor={color('textFillColor', '#f8d940')}
             arcColor={color('arcColor', '#75a096')}
-            remainigTimeArcColor={color('remainigTimeArcColor', '#f8d940')}
+            remainingTimeArcColor={color('remainingTimeArcColor', '#f8d940')}
             timeAmount={number('timeAmount', 120)}
-            timeRemaining={number('timeRemainig', 98)}
+            timeRemaining={number('timeRemaining', 98)}
         />
     ))
     .add('puzzle solved', () => (
@@ -33,8 +33,8 @@ storiesOf('Countdown', module)
             strokeSize={number('strokeSize', 10)}
             textFillColor={color('textFillColor', '#95c547')}
             arcColor={color('arcColor', '#75a096')}
-            remainigTimeArcColor={color('remainigTimeArcColor', '#95c547')}
+            remainingTimeArcColor={color('remainingTimeArcColor', '#95c547')}
             timeAmount={number('timeAmount', 120)}
-            timeRemaining={number('timeRemainig', 98)}
+            timeRemaining={number('timeRemaining', 98)}
         />
     ));;
