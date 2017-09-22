@@ -2,7 +2,7 @@ const path = require('path');
 const { fork } = require('child_process');
 const inquirer = require('inquirer');
 
-const Commands = {
+const Command = {
     GENERATE_COMPONENT: 'generate-component',
 };
 
@@ -12,7 +12,7 @@ const Commands = {
         name: 'command',
         type: 'list',
         choices: [
-            { value: Commands.GENERATE_COMPONENT, name: 'Generate component' },
+            { value: Command.GENERATE_COMPONENT, name: 'Generate component' },
         ]
     }]);
 

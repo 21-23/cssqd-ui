@@ -2,7 +2,7 @@ const fs = require('fs');
 const inquirer = require('inquirer');
 const { stripIndent } = require('common-tags');
 
-const ComponentTypes = {
+const ComponentType = {
     FUNCTION: 0,
     CLASS: 1,
 };
@@ -17,8 +17,8 @@ const ComponentTypes = {
         name: 'componentType',
         type: 'list',
         choices: [
-            { name: 'Function', value: ComponentTypes.FUNCTION },
-            { name: 'Class', value: ComponentTypes.CLASS },
+            { name: 'Function', value: ComponentType.FUNCTION },
+            { name: 'Class', value: ComponentType.CLASS },
         ]
     }]);
 
@@ -93,7 +93,7 @@ function story(name) {
 }
 
 function importNecessaryModules(componentType) {
-    if (componentType === ComponentTypes.CLASS) {
+    if (componentType === ComponentType.CLASS) {
         return `import { h, Component } from 'preact';`;
     } else {
         return `import { h } from 'preact';`;
@@ -102,10 +102,10 @@ function importNecessaryModules(componentType) {
 
 function generateComponent(name, componentType) {
     switch (componentType) {
-        case ComponentTypes.FUNCTION:
+        case ComponentType.FUNCTION:
             return generateFunctionComponent(name);
 
-        case ComponentTypes.CLASS:
+        case ComponentType.CLASS:
             return generateClassComponent(name);
 
         default: throw new Error(`Unknown component type "${componentType}"`)
