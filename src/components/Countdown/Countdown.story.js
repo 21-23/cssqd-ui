@@ -8,7 +8,7 @@ storiesOf('Countdown', module)
     .add('round start', () => (
         <Countdown
             size={number('size', 300)}
-            strokeSize={number('strokeSize', 10)}
+            strokeSize={number('strokeSize', 0.03)}
             textFillColor={color('textFillColor', '#f8d940')}
             arcColor={color('arcColor', '#75a096')}
             remainingTimeArcColor={color('remainingTimeArcColor', '#f8d940')}
@@ -19,7 +19,7 @@ storiesOf('Countdown', module)
     .add('some time elapsed', () => (
         <Countdown
             size={number('size', 300)}
-            strokeSize={number('strokeSize', 10)}
+            strokeSize={number('strokeSize', 0.03)}
             textFillColor={color('textFillColor', '#f8d940')}
             arcColor={color('arcColor', '#75a096')}
             remainingTimeArcColor={color('remainingTimeArcColor', '#f8d940')}
@@ -30,7 +30,7 @@ storiesOf('Countdown', module)
     .add('puzzle solved', () => (
         <Countdown
             size={number('size', 300)}
-            strokeSize={number('strokeSize', 10)}
+            strokeSize={number('strokeSize', 0.03)}
             textFillColor={color('textFillColor', '#95c547')}
             arcColor={color('arcColor', '#75a096')}
             remainingTimeArcColor={color('remainingTimeArcColor', '#95c547')}
