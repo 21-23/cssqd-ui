@@ -29,6 +29,7 @@
     "@storybook/react": "^3.2.8",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "common-tags": "^1.4.0",
     "inquirer": "^3.3.0",
