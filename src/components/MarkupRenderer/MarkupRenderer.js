@@ -24,8 +24,8 @@ class MarkupRenderer extends Component {
             <LineComponent
                 {...line}
                 colors={this.props.colors}
-                selected={this.props.actualSelection.indexOf(line.qdId) !== -1}
-                isValidSelection={this.props.expectedSelection.indexOf(line.qdId) !== -1}
+                isSelected={this.props.actualSelection.indexOf(line.qdId) !== -1}
+                shouldBeSelected={this.props.expectedSelection.indexOf(line.qdId) !== -1}
             />
         ));
 

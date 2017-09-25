@@ -1,12 +1,23 @@
 import { h } from 'preact';
 
-const SelectionIndicator = ({ isValidSelection, colorPalette }) => (
+function resolveBackgroundColor(isSelected, shouldBeSelected, colorPalette) {
+    if (!isSelected) {
+        return 'transparent';
+    }
+
+    if (shouldBeSelected) {
+        return colorPalette.validSelection;
+    } else {
+        return colorPalette.invalidSelection;
+    }
+}
+
+const SelectionIndicator = ({ isSelected, shouldBeSelected, colorPalette }) => (
     <span
         className="dot-selection-indicator"
         style={{
-            background: isValidSelection ?
-                colorPalette.validSelection :
-                colorPalette.invalidSelection,
+            background: resolveBackgroundColor(isSelected, shouldBeSelected, colorPalette),
+            borderColor: shouldBeSelected ? colorPalette.validSelection : 'transparent',
         }}
     >
         <style jsx>{`
@@ -20,15 +31,21 @@ const SelectionIndicator = ({ isValidSelection, colorPalette }) => (
                 top: 0;
                 margin: auto;
                 border-radius: 50%;
+                border-style: solid;
+                border-width: 2px;
+                border-color: transparent;
+                box-sizing: border-box;
+            }
         `}</style>
     </span>
 );
 
 export const withDotSelectionIndicator = (BaseComponent, colorPalette) => props => (
     <div className="dot-selection-indicator-container">
-        { props.selected ?
+        { props.isSelected || props.shouldBeSelected ?
             <SelectionIndicator
-                isValidSelection={props.isValidSelection}
+                isSelected={props.isSelected}
+                shouldBeSelected={props.shouldBeSelected}
                 colorPalette={colorPalette}
             /> : null
         }

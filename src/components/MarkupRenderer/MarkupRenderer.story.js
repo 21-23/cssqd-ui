@@ -45,8 +45,8 @@ storiesOf('MarkupRenderer', module)
             expectedSelection={array('expectedSelection', ["4"])}
             actualSelection={array('actualSelection', ["4", "5"])}
             LineComponent={withDotSelectionIndicator(Line, {
-                validSelection: '#a9da46',
-                invalidSelection: '#eb5680',
+                validSelection: 'rgba(169, 218, 70, 1)',
+                invalidSelection: 'rgba(235, 86, 128, 1)',
             })}
         />
     ))
@@ -62,6 +62,7 @@ storiesOf('MarkupRenderer', module)
             expectedSelection={array('expectedSelection', ["4"])}
             actualSelection={array('actualSelection', ["4", "5"])}
             LineComponent={withLineBackgroundSelection(Line, {
+                expectedSelection: 'rgba(169, 218, 70, 0.2)',
                 validSelection: 'rgba(169, 218, 70, 0.3)',
                 invalidSelection: 'rgba(235, 86, 128, 0.3)',
             })}
