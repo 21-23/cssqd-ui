@@ -17,6 +17,7 @@ export function transform(node, indentLevel, closing = false) {
         attributes: Array.from(node.attributes)
             .map(({ name, value }) => ({ name, value }))
             .filter(({ name }) => name !== 'data-qdid'),
+        text: node.childNodes.length === 1 && node.children.length === 0 ? node.innerText : null,
     };
 }
 
