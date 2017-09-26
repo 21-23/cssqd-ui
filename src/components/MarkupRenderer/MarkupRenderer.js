@@ -23,6 +23,7 @@ class MarkupRenderer extends Component {
         const lines = this.state.lines.map(line => (
             <LineComponent
                 {...line}
+                indentSize={this.props.indentSize}
                 colors={this.props.colors}
                 isSelected={this.props.actualSelection.indexOf(line.qdId) !== -1}
                 shouldBeSelected={this.props.expectedSelection.indexOf(line.qdId) !== -1}
@@ -52,7 +53,7 @@ class MarkupRenderer extends Component {
 
         const lines = Array.from(this.container.children)
             .map(root => Array.from(traverse(root)))
-            .reduce((chunk, flattened) => flattened.concat(chunk), []);
+            .reduce((chunk, flat) => [...flat, ...chunk], []);
 
         this.setState({ lines });
     }

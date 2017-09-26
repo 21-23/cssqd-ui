@@ -6,7 +6,7 @@ import { Line } from './Line';
 import { withDotSelectionIndicator } from './with-dot-selection-indicator';
 import { withLineBackgroundSelection } from './with-line-background-selection';
 
-import { text, array, object } from '@storybook/addon-knobs';
+import { text, array, object, number } from '@storybook/addon-knobs';
 
 const taskSource = `
 <main data-qdid="1">
@@ -29,6 +29,7 @@ storiesOf('MarkupRenderer', module)
     .add('default', () => (
         <MarkupRenderer
             source={text('source', taskSource)}
+            indentSize={number('indentSize', 4)}
             colors={object('colors', editorColorPalette)}
             expectedSelection={array('expectedSelection', ["4"])}
             actualSelection={array('actualSelection', ["4", "5"])}
@@ -38,6 +39,7 @@ storiesOf('MarkupRenderer', module)
     .add('with dot selection indicator', () => (
         <MarkupRenderer
             source={text('source', taskSource)}
+            indentSize={number('indentSize', 4)}
             colors={object('colors', editorColorPalette)}
             expectedSelection={array('expectedSelection', ["4"])}
             actualSelection={array('actualSelection', ["4", "5"])}
@@ -50,6 +52,7 @@ storiesOf('MarkupRenderer', module)
     .add('with background color selection', () => (
         <MarkupRenderer
             source={text('source', taskSource)}
+            indentSize={number('indentSize', 4)}
             colors={object('colors', editorColorPalette)}
             expectedSelection={array('expectedSelection', ["4"])}
             actualSelection={array('actualSelection', ["4", "5"])}

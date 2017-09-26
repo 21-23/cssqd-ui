@@ -4,7 +4,7 @@ export const indentString = (level, size) => new Array(level)
     .fill(' '.repeat(size))
     .join('');
 
-export function transform(node, indentLevel, closing = false) {
+export function serialize(node, indentLevel, closing = false) {
     const tagName = node.tagName.toLowerCase();
 
     return {
@@ -22,15 +22,15 @@ export function transform(node, indentLevel, closing = false) {
 }
 
 export function* traverse(node, indentLevel = 0) {
-    const transformedNode = transform(node, indentLevel);
-    yield transformedNode;
+    const serializedNode = serialize(node, indentLevel);
+    yield serializedNode;
 
     for (let i = 0; i < node.children.length; i++) {
         const child = node.children[i];
         yield* traverse(child, indentLevel + 1);
     }
 
-    if (!transformedNode.empty) {
-        yield transform(node, indentLevel, true);
+    if (!serializedNode.empty) {
+        yield serialize(node, indentLevel, true);
     }
 }
