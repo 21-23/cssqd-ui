@@ -23,17 +23,11 @@ const SelectionIndicator = ({ isSelected, shouldBeSelected, colorPalette }) => (
         <style jsx>{`
             .dot-selection-indicator {
                 display: inline-block;
-                width: .9em;
-                height: .9em;
-                position: absolute;
-                left: 0;
-                bottom: 0;
-                top: 0;
-                margin: auto;
+                width: 100%;
+                height: 100%;
                 border-radius: 50%;
                 border-style: solid;
                 border-width: 2px;
-                border-color: transparent;
                 box-sizing: border-box;
             }
         `}</style>
@@ -41,20 +35,30 @@ const SelectionIndicator = ({ isSelected, shouldBeSelected, colorPalette }) => (
 );
 
 export const withDotSelectionIndicator = (BaseComponent, colorPalette) => props => (
-    <div className="dot-selection-indicator-container">
-        { props.isSelected || props.shouldBeSelected ?
-            <SelectionIndicator
-                isSelected={props.isSelected}
-                shouldBeSelected={props.shouldBeSelected}
-                colorPalette={colorPalette}
-            /> : null
-        }
+    <div className="line-container">
+        <div className="dot-selection-indicator-container">
+            { props.isSelected || props.shouldBeSelected ?
+                <SelectionIndicator
+                    isSelected={props.isSelected}
+                    shouldBeSelected={props.shouldBeSelected}
+                    colorPalette={colorPalette}
+                /> : null
+            }
+        </div>
 
         <BaseComponent {...props} />
         <style jsx>{`
+            .line-container {
+                display: flex;
+                align-items: center;
+            }
+
             .dot-selection-indicator-container {
-                padding-left: 1.1em;
-                position: relative;
+                width: 1.2em;
+                height: 1.2em;
+                margin-right: 5px;
+                padding: .1em;
+                box-sizing: border-box;
             }
         `}</style>
     </div>
