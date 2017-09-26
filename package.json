@@ -22,7 +22,10 @@
   "homepage": "https://github.com/21-23/cssqd-ui#readme",
   "dependencies": {
     "preact": "^8.2.5",
-    "react-fontawesome": "^1.6.1"
+    "preact-redux": "^2.0.3",
+    "react-fontawesome": "^1.6.1",
+    "recompose": "^0.25.0",
+    "redux": "^3.7.2"
   },
   "devDependencies": {
     "@storybook/addon-knobs": "^3.2.10",
@@ -37,6 +40,7 @@
     "preact-compat": "^3.17.0",
     "styled-jsx": "^1.0.10",
     "url-loader": "^0.5.9",
+    "vinyl-fs": "^2.4.4",
     "webpack": "^3.5.5"
   }
 }
