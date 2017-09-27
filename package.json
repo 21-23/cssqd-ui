@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/21-23/cssqd-ui#readme",
   "dependencies": {
+    "classnames": "^2.2.5",
     "preact": "^8.2.5",
     "react-fontawesome": "^1.6.1"
   },
