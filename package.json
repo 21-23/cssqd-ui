@@ -7,6 +7,8 @@
     "start": "",
     "build": "",
     "watch": "",
+    "dev": "webpack-dev-server --hot --inline --content-base=./dist --config webpack.config.dev.js",
+    "clean": "rm -rf dist",
     "storybook": "start-storybook -p 9001 -c .storybook"
   },
   "repository": {
@@ -25,7 +27,8 @@
     "preact-redux": "^2.0.3",
     "react-fontawesome": "^1.6.1",
     "recompose": "^0.25.0",
-    "redux": "^3.7.2"
+    "redux": "^3.7.2",
+    "redux-actions": "^2.2.1"
   },
   "devDependencies": {
     "@storybook/addon-knobs": "^3.2.10",
@@ -36,11 +39,14 @@
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "common-tags": "^1.4.0",
+    "html-webpack-plugin": "^2.30.1",
     "inquirer": "^3.3.0",
     "preact-compat": "^3.17.0",
     "styled-jsx": "^1.0.10",
     "url-loader": "^0.5.9",
     "vinyl-fs": "^2.4.4",
-    "webpack": "^3.5.5"
+    "webpack": "^3.5.5",
+    "webpack-dev-server": "^2.9.1",
+    "webpack-merge": "^4.1.0"
   }
 }
