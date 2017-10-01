@@ -1,8 +1,4 @@
-export const MY_ACTION = 'MY_ACTION';
+import { createAction } from 'redux-actions';
 
-export function myAction(payload) {
-    return {
-        type: MY_ACTION,
-        payload
-    };
-}
+export const MY_ACTION = 'MY_ACTION';
+export const myAction = createAction(MY_ACTION);

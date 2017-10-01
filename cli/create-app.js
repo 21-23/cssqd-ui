@@ -13,12 +13,23 @@ const { toCamelCase } = require('./utils');
         type: 'input',
     }]);
 
-    const camelCaseName = toCamelCase(name);
+    const { camelCase, CamelCase } = toCamelCase(name);
+
+    console.log({
+        name,
+        camelCaseName: camelCase,
+        CamelCaseName: CamelCase,
+    });
+
 
     bootstrap({
         src: path.join(__dirname, `./app-module-template/**/#{*`),
         dest: path.join(__dirname, `../src/${name}`),
-        vars: { name, camelCaseName },
+        vars: {
+            name,
+            camelCaseName: camelCase,
+            CamelCaseName: CamelCase,
+        },
     });
 
     if (apps.indexOf(name) !== -1) {

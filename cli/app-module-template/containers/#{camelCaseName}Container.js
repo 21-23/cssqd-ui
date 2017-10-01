@@ -1,10 +1,10 @@
 import { h } from 'preact';
 
-import { AppContainer } from '../shared/containers/AppContainer';
+import { AppContainer } from '../../shared/containers/AppContainer';
 
-const #{camelCaseName}Container = () => (
+const #{CamelCaseName}Container = () => (
     <AppContainer>
     </AppContainer>
 );
 
-export { #{camelCaseName}Container };
+export { #{CamelCaseName}Container };

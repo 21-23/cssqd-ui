@@ -1,10 +1,10 @@
 import { h } from 'preact';
 import { connect } from 'preact-redux';
 
-const Pure#{camelCaseName} = () => (
+const Pure#{CamelCaseName} = () => (
     <div></div>
 );
 
-const #{camelCaseName} = connect()(Pure#{camelCaseName});
+const #{CamelCaseName} = connect()(Pure#{CamelCaseName});
 
-export { #{camelCaseName} };
+export { #{CamelCaseName} };

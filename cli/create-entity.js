@@ -34,12 +34,16 @@ process.on('message', (message) => onArgsReceived(message));
         app = answer.app;
     }
 
-    const camelCaseName = toCamelCase(name);
+    const { camelCase, CamelCase } = toCamelCase(name);
 
     bootstrap({
         src: path.join(__dirname, `./app-module-template/${entity}/__#{**`),
         dest: path.join(__dirname, `../src/${app}/${entity}`),
-        vars: { name, camelCaseName },
+        vars: {
+            name,
+            camelCaseName: camelCase,
+            CamelCaseName: CamelCase,
+        },
         filenamePrefix: '__#',
         done() {
             process.send({ name, app });

@@ -2,10 +2,10 @@ import { h, render } from 'preact';
 import { Provider } from 'preact-redux';
 
 import { store } from './#{name}-store';
-import { #{camelCaseName} } from './containers/#{camelCaseName}';
+import { #{CamelCaseName}Container } from './containers/#{CamelCaseName}Container';
 
 render(
     <Provider store={store}>
-        <#{camelCaseName} />
+        <#{CamelCaseName}Container />
     </Provider>,
 document.body);
