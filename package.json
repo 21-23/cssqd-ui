@@ -25,8 +25,9 @@
     "react-fontawesome": "^1.6.1"
   },
   "devDependencies": {
-    "@storybook/addon-knobs": "^3.2.8",
-    "@storybook/react": "^3.2.8",
+    "@storybook/addon-knobs": "^3.2.10",
+    "@storybook/addon-options": "^3.2.10",
+    "@storybook/react": "^3.2.10",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-plugin-transform-class-properties": "^6.24.1",
