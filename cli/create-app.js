@@ -41,6 +41,6 @@ const { toCamelCase } = require('./utils');
 
     fs.writeFileSync(
         path.join(__dirname, '../apps.json'),
-        JSON.stringify(apps, null, 2),
+        JSON.stringify(apps, null, 2) + '\n',
     );
 })();
