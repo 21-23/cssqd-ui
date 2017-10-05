@@ -8,4 +8,5 @@ render(
     <Provider store={store}>
         <GameContainer />
     </Provider>,
-document.body);
+    document.body
+);
