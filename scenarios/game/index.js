@@ -1,1 +1,1 @@
-require('./countdown');
+import './countdown';
