@@ -4,6 +4,7 @@ import { Canvas } from './Canvas';
 import { TimeRemainingText } from './TimeRemainingText';
 import { Arc } from './Arc';
 import { Animation } from './Animation';
+import * as Colors from './countdown-color-palette';
 
 const TIMER_TICK_INTERVAL = 1000;
 
@@ -62,5 +63,13 @@ class Countdown extends Component {
         });
     }
 }
+
+Countdown.defaultProps = {
+    size: 100,
+    strokeSize: 0.03,
+    textFillColor: Colors.TEXT_COLOR,
+    arcColor: Colors.ARC_COLOR,
+    remainingTimeArcColor: Colors.TIME_REMAINING_ARC_COLOR,
+};
 
 export { Countdown };

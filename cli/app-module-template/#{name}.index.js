@@ -8,4 +8,5 @@ render(
     <Provider store={store}>
         <#{CamelCaseName}Container />
     </Provider>,
-document.body);
+    document.body
+);

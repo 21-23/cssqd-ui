@@ -13,7 +13,10 @@ const ownConfig = {
 };
 
 ownConfig.entry = apps.reduce((entries, appName) => {
-    entries[appName] = `./src/${appName}/${appName}.index.js`;
+    entries[appName] = [
+        `./src/${appName}/${appName}.index.js`,
+        `./scenarios/${appName}/index.js`,
+    ];
     return entries;
 }, {});
 
