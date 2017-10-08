@@ -7,12 +7,13 @@ import { SelectorInput } from './SelectorInput';
 storiesOf('SelectorInput', module)
     .add('default', () => (
         <SelectorInput
-            onChange={action('onChange')}
+            value=".match"
+            onInput={action('onInput')}
         />
     ))
     .add('disabled', () => (
         <SelectorInput
-            onChange={action('onChange')}
+            onInput={action('onInput')}
             disabled
         />
     ));
