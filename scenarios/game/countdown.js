@@ -1,3 +1,5 @@
+import { pause } from '../helpers';
+
 import { store } from '../../src/game/game-store';
 import * as RoundPhaseActions from '../../src/shared/actions/round-phase-actions';
 import * as CountdownActions from '../../src/shared/actions/countdown-actions';
@@ -5,13 +7,7 @@ import { DURATION } from '../../src/shared/constants/round';
 
 store.dispatch(RoundPhaseActions.startRound());
 
-async function pause(ms) {
-    return new Promise(resolve => {
-        setTimeout(resolve, ms);
-    });
-}
-
-(async () => {
+export async function countdown() {
     let timeRemaining = DURATION;
 
     while (timeRemaining >= 0) {
@@ -19,4 +15,4 @@ async function pause(ms) {
         await pause(1000);
         timeRemaining--;
     }
-})();
+};
