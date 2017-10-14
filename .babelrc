@@ -2,6 +2,7 @@
     "plugins": [
         ["transform-react-jsx", { "pragma": "h" }],
         "styled-jsx/babel",
-        "transform-class-properties"
+        "transform-class-properties",
+        "transform-object-rest-spread"
     ]
 }

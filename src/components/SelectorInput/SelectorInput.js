@@ -2,17 +2,17 @@ import { h } from 'preact';
 
 import * as Colors from './selector-input-color-palette';
 
-const SelectorInput = ({ onChange, disabled }) => (
+const SelectorInput = ({ onInput, disabled, value }) => (
     <input
         type="text"
-        onChange={e => onChange(e.target.value)}
+        onInput={e => onInput(e.target.value)}
         disabled={disabled}
         placeholder="Enter your selector here..."
+        value={value}
     >
         <style jsx>{`
             input {
                 width: 100%;
-                flex: 1;
                 box-sizing: border-box;
                 outline: none;
                 padding: 20px;
