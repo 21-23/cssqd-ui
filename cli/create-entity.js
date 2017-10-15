@@ -20,7 +20,7 @@ process.on('message', (message) => onArgsReceived(message));
 
     if (!name || !app) {
         const answer = await inquirer.prompt([{
-            message: `${toCamelCase(entity)} name? (train-case)`,
+            message: `${toCamelCase(entity).CamelCase} name? (train-case)`,
             name: 'name',
             type: 'input',
         }, {

@@ -1,5 +1,6 @@
 import { h } from 'preact';
 import { connect } from 'preact-redux';
+import { createStructuredSelector } from 'reselect';
 
 import { RoundLayout } from '../components/RoundLayout';
 import { Countdown } from '../../components/Countdown/Countdown';
@@ -7,9 +8,12 @@ import { SelectorInput } from '../../components/SelectorInput/SelectorInput';
 import { MarkupRenderer } from '../../components/MarkupRenderer/MarkupRenderer';
 import { withDotSelectionIndicator } from '../../components/MarkupRenderer/with-dot-selection-indicator';
 import { Line } from '../../components/MarkupRenderer/Line';
+import { BannedCharacters } from '../../components/BannedCharacters/BannedCharacters';
 
 import * as RoundPhase from '../../shared/constants/round-phase';
 import { DURATION } from '../../shared/constants/round';
+
+import { bannedChars, highlightedBannedChars, selector } from '../selectors/round-selectors';
 
 import { setSelector } from '../actions/solution-actions';
 
@@ -22,6 +26,8 @@ const PureRound = ({
     markup,
     expectedSelection,
     actualSelection,
+    bannedChars,
+    highlightedBannedChars,
 }) => roundPhase !== RoundPhase.IN_PROGRESS && roundPhase !== RoundPhase.FINISHED ? null :
     <RoundLayout>
         <SelectorInput
@@ -33,6 +39,10 @@ const PureRound = ({
             timeAmount={DURATION}
             timeRemaining={timeRemaining}
         />
+        <BannedCharacters
+            bannedCharacters={bannedChars}
+            highlightedCharacters={highlightedBannedChars}
+        />
         <MarkupRenderer
             source={markup}
             expectedSelection={expectedSelection}
@@ -40,13 +50,15 @@ const PureRound = ({
         />
     </RoundLayout>
 
-const RoundContainer = connect(state => ({
-    roundPhase: state.roundPhase,
-    timeRemaining: state.countdown,
-    selector: state.solution.selector,
-    markup: state.puzzle.markup,
-    expectedSelection: state.puzzle.expectedSelection,
-    actualSelection: state.solution.selection,
+const RoundContainer = connect(createStructuredSelector({
+    roundPhase: state => state.roundPhase,
+    timeRemaining: state => state.countdown,
+    markup: state => state.puzzle.markup,
+    expectedSelection: state => state.puzzle.expectedSelection,
+    actualSelection: state => state.solution.selection,
+    selector,
+    bannedChars,
+    highlightedBannedChars,
 }), {
     setSelector,
 })(PureRound);
