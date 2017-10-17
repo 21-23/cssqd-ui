@@ -23,4 +23,11 @@ export const withLineBackgroundSelection = (BaseComponent, colorPalette) => prop
     >
         <BaseComponent {...props} />
     </div>
-)
+);
+
+export const LineBackgroundSelectionColors = {
+    expectedSelection: 'rgba(169, 218, 70, 0.2)',
+    validSelection: 'rgba(169, 218, 70, 0.3)',
+    invalidSelection: 'rgba(235, 86, 128, 0.3)',
+};
+

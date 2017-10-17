@@ -62,4 +62,9 @@ export const withDotSelectionIndicator = (BaseComponent, colorPalette) => props 
             }
         `}</style>
     </div>
-)
+);
+
+export const DotSelectionIndicatorColors = {
+    validSelection: 'rgba(169, 218, 70, 1)',
+    invalidSelection: 'rgba(235, 86, 128, 1)',
+};

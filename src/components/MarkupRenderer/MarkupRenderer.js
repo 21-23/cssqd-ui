@@ -1,6 +1,10 @@
 import { h, Component } from 'preact';
 
 import { Line } from './Line';
+import { withDotSelectionIndicator, DotSelectionIndicatorColors } from './with-dot-selection-indicator';
+
+import { EditorColors } from './markup-renderer-color-palette';
+
 import { transform, traverse } from './markup-renderer-helpers';
 
 class MarkupRenderer extends Component {
@@ -58,5 +62,12 @@ class MarkupRenderer extends Component {
         this.setState({ lines });
     }
 }
+
+MarkupRenderer.defaultProps = {
+    indentSize: 4,
+    colors: EditorColors,
+    actualSelection: [],
+    LineComponent: withDotSelectionIndicator(Line, DotSelectionIndicatorColors)
+};
 
 export { MarkupRenderer };

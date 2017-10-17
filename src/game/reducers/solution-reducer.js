@@ -2,7 +2,7 @@ import * as Actions from '../actions/solution-actions';
 
 const initialState = {
     selector: '',
-    isCorrect: false,
+    selection: [],
 };
 
 export function solutionReducer(state = initialState, action) {
@@ -11,6 +11,12 @@ export function solutionReducer(state = initialState, action) {
             return {
                 ...state,
                 selector: action.payload,
+            };
+
+        case Actions.SET_SELECTION:
+            return {
+                ...state,
+                selection: action.payload,
             };
 
         default: return state;

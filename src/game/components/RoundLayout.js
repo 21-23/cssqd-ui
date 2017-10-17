@@ -14,6 +14,9 @@ const RoundLayout = ({ children }) => {
                 </div>
                 { components.Countdown }
             </div>
+            <div>
+                { components.MarkupRenderer }
+            </div>
 
             <style jsx>{`
                 .app-root {

@@ -10,10 +10,15 @@ export async function inputSelector(selector) {
     while (charsCount < selector.length) {
         charsCount++;
 
-        const delay = randomInt({ max: 500 });
+        const delay = randomInt({ max: 300 });
         await pause(delay);
 
         const action = setSelector(selector.substring(0, charsCount));
         store.dispatch(action);
     }
+}
+
+export async function erase() {
+    const action = setSelector('');
+    store.dispatch(action);
 }

@@ -2,9 +2,11 @@ import { h } from 'preact';
 import { storiesOf } from '@storybook/react';
 
 import { MarkupRenderer } from './MarkupRenderer';
+import { EditorColors } from './markup-renderer-color-palette';
+
 import { Line } from './Line';
-import { withDotSelectionIndicator } from './with-dot-selection-indicator';
-import { withLineBackgroundSelection } from './with-line-background-selection';
+import { withDotSelectionIndicator, DotSelectionIndicatorColors } from './with-dot-selection-indicator';
+import { withLineBackgroundSelection, LineBackgroundSelectionColors } from './with-line-background-selection';
 
 import { text, array, object, number } from '@storybook/addon-knobs';
 
@@ -18,19 +20,11 @@ const taskSource = `
 </main>
 `;
 
-const editorColorPalette = {
-    primary: 'white',
-    tagName: '#eb5680',
-    attrName: '#a9da46',
-    attrValue: '#cac277',
-};
-
 storiesOf('MarkupRenderer', module)
     .add('default', () => (
         <MarkupRenderer
             source={text('source', taskSource)}
             indentSize={number('indentSize', 4)}
-            colors={object('colors', editorColorPalette)}
             expectedSelection={array('expectedSelection', ["4"])}
             actualSelection={array('actualSelection', ["4", "5"])}
             LineComponent={Line}
@@ -40,26 +34,17 @@ storiesOf('MarkupRenderer', module)
         <MarkupRenderer
             source={text('source', taskSource)}
             indentSize={number('indentSize', 4)}
-            colors={object('colors', editorColorPalette)}
             expectedSelection={array('expectedSelection', ["4"])}
             actualSelection={array('actualSelection', ["4", "5"])}
-            LineComponent={withDotSelectionIndicator(Line, {
-                validSelection: 'rgba(169, 218, 70, 1)',
-                invalidSelection: 'rgba(235, 86, 128, 1)',
-            })}
+            LineComponent={withDotSelectionIndicator(Line, DotSelectionIndicatorColors)}
         />
     ))
     .add('with background color selection', () => (
         <MarkupRenderer
             source={text('source', taskSource)}
             indentSize={number('indentSize', 4)}
-            colors={object('colors', editorColorPalette)}
             expectedSelection={array('expectedSelection', ["4"])}
             actualSelection={array('actualSelection', ["4", "5"])}
-            LineComponent={withLineBackgroundSelection(Line, {
-                expectedSelection: 'rgba(169, 218, 70, 0.2)',
-                validSelection: 'rgba(169, 218, 70, 0.3)',
-                invalidSelection: 'rgba(235, 86, 128, 0.3)',
-            })}
+            LineComponent={withLineBackgroundSelection(Line, LineBackgroundSelectionColors)}
         />
     ));
