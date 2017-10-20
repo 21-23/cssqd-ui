@@ -1,10 +1,6 @@
 import { createSelector } from 'reselect';
-
-const puzzle = state => state.puzzle;
-const solution = state => state.solution;
-
-export const selector = createSelector([solution], solution => solution.selector);
-export const bannedChars = createSelector([puzzle], puzzle => puzzle.bannedChars);
+import { bannedChars } from '../../shared/selectors/puzzle-selectors';
+import { selector } from './solution-selectors';
 
 export const highlightedBannedChars = createSelector(
     [bannedChars, selector],

@@ -13,10 +13,13 @@ import { BannedCharacters } from '../../components/BannedCharacters/BannedCharac
 import * as RoundPhase from '../../shared/constants/round-phase';
 import { DURATION } from '../../shared/constants/round';
 
-import { bannedChars, highlightedBannedChars, selector } from '../selectors/round-selectors';
+import { phase } from '../../shared/selectors/round-phase-selectors';
+import { countdown } from '../../shared/selectors/countdown-selectors';
+import { expectedSelection, bannedChars, markup} from '../../shared/selectors/puzzle-selectors';
+import { selector, selection } from '../selectors/solution-selectors';
+import { highlightedBannedChars } from '../selectors/round-selectors';
 
 import { setSelector } from '../actions/solution-actions';
-
 
 const PureRound = ({
     roundPhase,
@@ -51,11 +54,11 @@ const PureRound = ({
     </RoundLayout>
 
 const RoundContainer = connect(createStructuredSelector({
-    roundPhase: state => state.roundPhase,
-    timeRemaining: state => state.countdown,
-    markup: state => state.puzzle.markup,
-    expectedSelection: state => state.puzzle.expectedSelection,
-    actualSelection: state => state.solution.selection,
+    roundPhase: phase,
+    timeRemaining: countdown,
+    markup,
+    expectedSelection,
+    actualSelection: selection,
     selector,
     bannedChars,
     highlightedBannedChars,
