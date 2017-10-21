@@ -8,7 +8,9 @@
     "build": "",
     "watch": "",
     "dev": "webpack-dev-server --hot --inline --content-base=./dist --config webpack.config.dev.js",
+    "build:prod": "npm run clean:prod && webpack --config webpack.config.prod.js",
     "clean": "rm -rf dist",
+    "clean:prod": "rm -rf dist-prod",
     "storybook": "start-storybook -p 9001 -c .storybook"
   },
   "repository": {
