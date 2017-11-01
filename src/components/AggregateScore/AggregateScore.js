@@ -1,6 +1,6 @@
 import { h } from 'preact';
 import { holyWhite, superLightGreen, secondaryActionColor } from 'styles/colour-palette';
-import { formatScoreTime } from 'common/formatters';
+import { formatScoreTime } from 'shared/formatters';
 
 function generateEntries(score) {
     return score.map((entry, index) => {
@@ -15,6 +15,16 @@ function generateEntries(score) {
                         line-height: 3em;
                         color: ${holyWhite};
                         border-bottom: 1px solid ${superLightGreen};
+                    }
+                    .-position {
+                        flex: 1 1 10%;
+                    }
+                    .-name {
+                        flex: 3 1 75%;
+                    }
+                    .-time {
+                        flex: 1 1 15%;
+                        text-align: right;
                     }
                 `}</style>
             </div>
@@ -44,6 +54,10 @@ const AggregateScore = ({ score }) => (
                 padding: 1em 0;
                 color: ${secondaryActionColor}
             }
+            .list-container {
+                flex: 1;
+                overflow-y: auto;
+            }
             .-position {
                 flex: 1 1 10%;
             }
@@ -53,10 +67,6 @@ const AggregateScore = ({ score }) => (
             .-time {
                 flex: 1 1 15%;
                 text-align: right;
-            }
-            .list-container {
-                flex: 1;
-                overflow-y: auto;
             }
         `}</style>
     </div>

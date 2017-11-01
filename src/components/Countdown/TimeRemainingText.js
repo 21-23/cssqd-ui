@@ -1,4 +1,5 @@
 import { h, Component } from 'preact';
+import { formatScoreTime } from 'shared/formatters';
 
 const COMPONENT_SIZE_TO_FONT_SIZE_RATIO = 4;
 
@@ -8,9 +9,9 @@ class TimeRemainingText extends Component {
 
         this.props.ctx.font = `${this.fontSize}px sans-serif`;
         this.props.ctx.fillStyle = this.props.textFillColor;
-        this.props.ctx.textBaseline = 'middle'
+        this.props.ctx.textBaseline = 'middle';
 
-        this.text = this._formatText(this.props.timeRemaining);
+        this.text = formatScoreTime(this.props.timeRemaining);
         const { width } = this.props.ctx.measureText(this.text);
 
         this.textX = (this.props.size - width) / 2;
@@ -19,13 +20,6 @@ class TimeRemainingText extends Component {
 
     renderToCanvas() {
         this.props.ctx.fillText(this.text, this.textX, this.textY);
-    }
-
-    _formatText(timeRemaining) {
-        const minutes = Math.floor(timeRemaining / 60);
-        const seconds = timeRemaining - (minutes * 60);
-
-        return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
     }
 }
 
