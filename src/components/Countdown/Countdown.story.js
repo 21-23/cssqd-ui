@@ -27,4 +27,4 @@ storiesOf('Countdown', module)
             timeAmount={number('timeAmount', 120)}
             timeRemaining={number('timeRemaining', 98)}
         />
-    ));;
+    ));
