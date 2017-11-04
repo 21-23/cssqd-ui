@@ -3,9 +3,8 @@ import { pause } from '../helpers';
 import { countdown } from './countdown';
 import { inputSelector, erase } from './input-selector';
 import { setPuzzle } from './puzzle';
-
-
-countdown();
+import * as RoundPhaseActions from '../../src/shared/actions/round-phase-actions';
+import { DURATION } from '../../src/shared/constants/round';
 
 setPuzzle({
     title: 'Signing Up',
@@ -24,9 +23,19 @@ setPuzzle({
 });
 
 (async () => {
-    await inputSelector('input');
-    await pause(500);
-    erase();
-    await pause(500);
-    await inputSelector(':checked');
+    await countdown(3);
+    store.dispatch(RoundPhaseActions.startRound());
+    await Promise.all([
+        countdown(DURATION),
+
+        (async () => {
+            await inputSelector('input');
+            await pause(500);
+            erase();
+            await pause(500);
+            await inputSelector(':checked');
+        })(),
+    ]);
+
+    store.dispatch(RoundPhaseActions.finishRound());
 })();
