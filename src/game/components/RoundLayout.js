@@ -8,6 +8,7 @@ const RoundLayout = ({ children }) => {
 
     return (
         <div className="app-root">
+            { components.PuzzleTitle }
             { components.BannedCharacters }
             <div className="panel">
                 <div className="selector-input-container">

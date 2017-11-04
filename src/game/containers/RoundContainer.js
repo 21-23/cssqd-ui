@@ -9,13 +9,20 @@ import { MarkupRenderer } from '../../components/MarkupRenderer/MarkupRenderer';
 import { withDotSelectionIndicator } from '../../components/MarkupRenderer/with-dot-selection-indicator';
 import { Line } from '../../components/MarkupRenderer/Line';
 import { BannedCharacters } from '../../components/BannedCharacters/BannedCharacters';
+import { PuzzleTitle } from '../../components/PuzzleTitle/PuzzleTitle';
 
 import * as RoundPhase from '../../shared/constants/round-phase';
 import { DURATION } from '../../shared/constants/round';
 
 import { phase } from '../../shared/selectors/round-phase-selectors';
 import { countdown } from '../../shared/selectors/countdown-selectors';
-import { expectedSelection, bannedChars, markup} from '../../shared/selectors/puzzle-selectors';
+import {
+    expectedSelection,
+    bannedChars,
+    markup,
+    index as puzzleIndex,
+    title as puzzleTitle,
+} from '../../shared/selectors/puzzle-selectors';
 import { selector, selection } from '../selectors/solution-selectors';
 import { highlightedBannedChars } from '../selectors/round-selectors';
 
@@ -31,8 +38,14 @@ const PureRound = ({
     actualSelection,
     bannedChars,
     highlightedBannedChars,
+    puzzleIndex,
+    puzzleTitle,
 }) => roundPhase !== RoundPhase.IN_PROGRESS && roundPhase !== RoundPhase.FINISHED ? null :
     <RoundLayout>
+        <PuzzleTitle
+            index={puzzleIndex}
+            title={puzzleTitle}
+        />
         <SelectorInput
             value={selector}
             disabled={roundPhase === RoundPhase.FINISHED}
@@ -62,6 +75,8 @@ const RoundContainer = connect(createStructuredSelector({
     selector,
     bannedChars,
     highlightedBannedChars,
+    puzzleIndex,
+    puzzleTitle,
 }), {
     setSelector,
 })(PureRound);
