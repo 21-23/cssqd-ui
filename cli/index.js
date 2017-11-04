@@ -10,6 +10,7 @@ const Command = {
     CREATE_CONTAINER: { value: 'create-container', name: 'Create container' },
     CREATE_MIDDLEWARE: { value: 'create-middleware', name: 'Create middleware' },
     CREATE_REDUCER: { value: 'create-reducer', name: 'Create reducer' },
+    CREATE_SELECTORS: { value: 'create-selectors', name: 'Create selectors' },
 };
 
 const Commands = [
@@ -20,7 +21,8 @@ const Commands = [
     Command.CREATE_CONTAINER,
     Command.CREATE_MIDDLEWARE,
     Command.CREATE_REDUCER,
-]
+    Command.CREATE_SELECTORS,
+];
 
 const Entity = {
     ACTIONS: 'actions',
@@ -28,6 +30,7 @@ const Entity = {
     CONTAINER: 'containers',
     MIDDLEWARE: 'middlewares',
     REDUCER: 'reducers',
+    SELECTORS: 'selectors',
 }
 
 const CommandToEntityTypeMap = {
@@ -36,6 +39,7 @@ const CommandToEntityTypeMap = {
     [Command.CREATE_CONTAINER.value]: Entity.CONTAINER,
     [Command.CREATE_MIDDLEWARE.value]: Entity.MIDDLEWARE,
     [Command.CREATE_REDUCER.value]: Entity.REDUCER,
+    [Command.CREATE_SELECTORS.value]: Entity.SELECTORS,
 };
 
 (async () => {
