@@ -8,6 +8,8 @@ import { setPuzzle } from './puzzle';
 countdown();
 
 setPuzzle({
+    title: 'Signing Up',
+    index: 1,
     markup :`
     <main data-qdid="1">
         <input data-qdid="2" type="text"></input>
