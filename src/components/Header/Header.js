@@ -18,6 +18,7 @@ const Header = ({ productName, username, backgroundImageUrl }) => (
                 background-size: auto 100%;
                 color: white;
                 box-sizing: border-box;
+                border-bottom: 1px solid #49837e;
             }
 
             .user-icon {
