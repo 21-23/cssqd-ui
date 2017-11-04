@@ -26,7 +26,20 @@ const BannedCharacters = ({ bannedCharacters = [], highlightedCharacters = [] })
                 display: inline-block;
                 margin-right: 5px;
             }
+        `}</style>
+    </div>)
+};
 
+const BannedCharactrer = (char, isHighlighted) => {
+    const bannedCharacterClasses = classNames('banned-character', {
+        'highlighted': isHighlighted,
+    });
+
+    return (
+        <div className={bannedCharacterClasses}>
+            { char }
+
+            <style jsx>{`
             .banned-character {
                 box-sizing: border-box;
                 font-family: monospace;
@@ -50,18 +63,9 @@ const BannedCharacters = ({ bannedCharacters = [], highlightedCharacters = [] })
                 border: 2px solid ${Colors.HIGHLIGHTED_CHARACTER_BORDER};
                 transform: scale(${DisplayConstants.HIGHLIGHTED_CHAR_SCALE_COEFFICIENT});
             }
-        `}</style>
-    </div>)
-};
-
-const BannedCharactrer = (char, isHighlighted) => {
-    const bannedCharacterClasses = classNames('banned-character', {
-        'highlighted': isHighlighted,
-    });
-
-    return (<div className={bannedCharacterClasses}>
-        { char }
-    </div>);
+            `}</style>
+        </div>
+    );
 };
 
 export { BannedCharacters };
