@@ -3,34 +3,51 @@ import classNames from 'classnames';
 import { DisplayConstants, Colors } from './banned-characters-style-constants';
 
 const BannedCharacters = ({ bannedCharacters = [], highlightedCharacters = [] }) => {
-    if (!bannedCharacters.length) {
-        return null;
+    let content = null;
+
+    if (bannedCharacters && bannedCharacters.length) {
+        content = bannedCharacters.map(char => BannedCharacter(char, highlightedCharacters.includes(char)));
     }
 
-    return (<div class="banned-characters">
-        <span class="label">Banned chars </span>
-        { bannedCharacters.map(char => BannedCharactrer(char, highlightedCharacters.includes(char))) }
+    if (bannedCharacters && !bannedCharacters.length) {
+        content = (
+            <span>
+                no restrictions for this round
+                <style jsx>{`
+                    span {
+                        color: rgb(202, 194, 119);
+                    }
+                `}</style>
+            </span>
+        );
+    }
 
-        <style jsx>{`
-            .banned-characters {
-                display: inline-flex;
-                align-items: center;
-                min-height: 35px;
-            }
+    return (
+        <div class="banned-characters">
+            <span class="label">Banned chars: </span>
+            { content }
 
-            .label {
-                font-weight: 600;
-                font-family: sans-serif;
-                font-size: ${DisplayConstants.FONT_SIZE}px;
-                color: ${Colors.LABEL};
-                display: inline-block;
-                margin-right: 5px;
-            }
-        `}</style>
-    </div>)
+            <style jsx>{`
+                .banned-characters {
+                    display: inline-flex;
+                    align-items: center;
+                    min-height: 35px;
+                }
+
+                .label {
+                    font-weight: 600;
+                    font-family: sans-serif;
+                    font-size: ${DisplayConstants.FONT_SIZE}px;
+                    color: ${Colors.LABEL};
+                    display: inline-block;
+                    margin-right: 5px;
+                }
+            `}</style>
+        </div>
+    );
 };
 
-const BannedCharactrer = (char, isHighlighted) => {
+const BannedCharacter = (char, isHighlighted) => {
     const bannedCharacterClasses = classNames('banned-character', {
         'highlighted': isHighlighted,
     });

@@ -10,11 +10,13 @@ import { withDotSelectionIndicator } from '../../components/MarkupRenderer/with-
 import { Line } from '../../components/MarkupRenderer/Line';
 import { BannedCharacters } from '../../components/BannedCharacters/BannedCharacters';
 import { PuzzleTitle } from '../../components/PuzzleTitle/PuzzleTitle';
+import { RoundStartCountdown } from '../../components/RoundStartCountdown/RoundStartCountDown';
+
 
 import * as RoundPhase from '../../shared/constants/round-phase';
 import { DURATION } from '../../shared/constants/round';
 
-import { phase } from '../../shared/selectors/round-phase-selectors';
+import { roundStarted, roundFinished } from '../../shared/selectors/round-phase-selectors';
 import { countdown } from '../../shared/selectors/countdown-selectors';
 import {
     expectedSelection,
@@ -29,7 +31,8 @@ import { highlightedBannedChars } from '../selectors/round-selectors';
 import { setSelector } from '../actions/solution-actions';
 
 const PureRound = ({
-    roundPhase,
+    roundStarted,
+    roundFinished,
     timeRemaining,
     selector,
     setSelector,
@@ -40,7 +43,7 @@ const PureRound = ({
     highlightedBannedChars,
     puzzleIndex,
     puzzleTitle,
-}) => roundPhase !== RoundPhase.IN_PROGRESS && roundPhase !== RoundPhase.FINISHED ? null :
+}) => (
     <RoundLayout>
         <PuzzleTitle
             index={puzzleIndex}
@@ -48,26 +51,37 @@ const PureRound = ({
         />
         <SelectorInput
             value={selector}
-            disabled={roundPhase === RoundPhase.FINISHED}
+            disabled={!roundStarted || roundFinished}
             onInput={setSelector}
         />
-        <Countdown
-            timeAmount={DURATION}
-            timeRemaining={timeRemaining}
-        />
+
         <BannedCharacters
-            bannedCharacters={bannedChars}
-            highlightedCharacters={highlightedBannedChars}
+            bannedCharacters={ roundStarted ? bannedChars : null }
+            highlightedCharacters={ roundStarted ? highlightedBannedChars : null }
         />
-        <MarkupRenderer
-            source={markup}
-            expectedSelection={expectedSelection}
-            actualSelection={actualSelection}
-        />
+
+        { !roundStarted ? null :
+            <Countdown
+                timeAmount={DURATION}
+                timeRemaining={timeRemaining}
+            />
+        }
+
+        { !roundStarted ? null :
+            <MarkupRenderer
+                source={markup}
+                expectedSelection={expectedSelection}
+                actualSelection={actualSelection}
+            />
+        }
+
+        { (roundStarted || roundFinished) ? null : <RoundStartCountdown timeRemaining={timeRemaining} /> }
     </RoundLayout>
+);
 
 const RoundContainer = connect(createStructuredSelector({
-    roundPhase: phase,
+    roundStarted,
+    roundFinished,
     timeRemaining: countdown,
     markup,
     expectedSelection,
