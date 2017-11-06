@@ -1,6 +1,7 @@
 import { h, Component } from 'preact';
 import classNames from 'classnames';
 import Icon from 'react-fontawesome';
+import { Colors } from './pearl-thread-style-constants';
 
 class PearlThread extends Component {
     render({ items = [], activeIndex = 0, isClickable, onPearlClick }) {
@@ -11,7 +12,7 @@ class PearlThread extends Component {
                 <div className="progress-bar" style={{ width: `${progressPercentage}%` }} ></div>
 
                 <div className="puzzle-progress-container">
-                    {items.map((item, index) => PuzzleProgressItem({
+                    {items.map((item, index) => Pearl({
                         caption: item.caption,
                         index,
                         activeIndex,
@@ -34,7 +35,7 @@ class PearlThread extends Component {
                     }
 
                     .progress-bar {
-                        background-color: #fdd522;
+                        background-color: ${Colors.PROGRESS_BAR_COLOR};
                         width: 100%;
                         height: 3px;
                         transition: width 1s;
@@ -45,7 +46,7 @@ class PearlThread extends Component {
     }
 }
 
-const PuzzleProgressItem = ({ caption, index, activeIndex, isClickable, onPearlClick }) => {
+const Pearl = ({ caption, index, activeIndex, isClickable, onPearlClick }) => {
     let content;
 
     if (index < activeIndex) {
@@ -56,7 +57,7 @@ const PuzzleProgressItem = ({ caption, index, activeIndex, isClickable, onPearlC
         content = index + 1;
     }
 
-    const itemClass = classNames('puzzle-progress-item', {
+    const itemClass = classNames('pearl', {
         'solved': index < activeIndex,
         'current': index === activeIndex,
         'future': index > activeIndex,
@@ -70,25 +71,25 @@ const PuzzleProgressItem = ({ caption, index, activeIndex, isClickable, onPearlC
         { content }
 
         <style jsx>{`
-            .puzzle-progress-item {
+            .pearl {
                 width: 25px;
                 height: 25px;
                 line-height: 29px;
                 text-align: center;
-                color: #badece;
+                color: ${Colors.UNSOLVED_PEARL_COLOR};
             }
 
-            .puzzle-progress-item.solved {
+            .pearl.solved {
                 border: 2px solid #4c8580;
                 border-radius: 50%;
             }
 
-            .puzzle-progress-item.solved,
-            .puzzle-progress-item.current {
-                color: #f8d940;
+            .pearl.solved,
+            .pearl.current {
+                color: ${Colors.SOLVED_PEARL_COLOR};
             }
 
-            .puzzle-progress-item.current {
+            .pearl.current {
                 transform: translateX(-50%);
                 white-space: nowrap;
             }
