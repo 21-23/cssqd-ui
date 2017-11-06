@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import Icon from 'react-fontawesome';
 
 class PearlThread extends Component {
-    render({ items = [], activeIndex = 0, isClickable }) {
+    render({ items = [], activeIndex = 0, isClickable, onPearlClick }) {
         const progressPercentage = (activeIndex / (items.length - 1)) * 100;
 
         return (
@@ -11,7 +11,13 @@ class PearlThread extends Component {
                 <div className="progress-bar" style={{ width: `${progressPercentage}%` }} ></div>
 
                 <div className="puzzle-progress-container">
-                    {items.map((item, index) => PuzzleProgressItem(item.caption, index, activeIndex, isClickable))}
+                    {items.map((item, index) => PuzzleProgressItem({
+                        caption: item.caption,
+                        index,
+                        activeIndex,
+                        isClickable,
+                        onPearlClick,
+                    }))}
                 </div>
 
 
@@ -39,7 +45,7 @@ class PearlThread extends Component {
     }
 }
 
-const PuzzleProgressItem = (caption, index, activeIndex, isClickable) => {
+const PuzzleProgressItem = ({ caption, index, activeIndex, isClickable, onPearlClick }) => {
     let content;
 
     if (index < activeIndex) {
@@ -57,7 +63,10 @@ const PuzzleProgressItem = (caption, index, activeIndex, isClickable) => {
         'clickable': isClickable,
     });
 
-    return (<div className={itemClass}>
+    return (<div
+        className={itemClass}
+        onClick={isClickable ? onPearlClick.bind(null, index) : null}>
+
         { content }
 
         <style jsx>{`

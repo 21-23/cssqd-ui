@@ -10,5 +10,6 @@ storiesOf('PearlThread', module)
             items={new Array(12).fill({caption: 'Signing up'})}
             activeIndex={number('activeIndex', 5)}
             isClickable={boolean('isClickable', false)}
+            onPearlClick={console.log}
         />
     ));
