@@ -3,50 +3,65 @@ import classNames from 'classnames';
 import Icon from 'react-fontawesome';
 import { Colors } from './pearl-thread-style-constants';
 
-class PearlThread extends Component {
-    render({ items = [], activeIndex = 0, isClickable, onPearlClick }) {
-        const progressPercentage = (activeIndex / (items.length - 1)) * 100;
+function onPearlThreadClick(onPearlClick, event) {
+    let target = event.target;
 
-        return (
-            <div className="pearl-thread">
-                <div className="progress-bar" style={{ width: `${progressPercentage}%` }} ></div>
+    while (target) {
+        const pearlIndex = target.dataset && target.dataset.pearlIndex;
 
-                <div className="puzzle-progress-container">
-                    {items.map((item, index) => Pearl({
-                        caption: item.caption,
-                        index,
-                        activeIndex,
-                        isClickable,
-                        onPearlClick,
-                    }))}
-                </div>
+        if (pearlIndex) {
+            onPearlClick(+pearlIndex);
+        }
 
-
-                <style jsx>{`
-                    .pearl-thread {
-                        min-height: 60px;
-                        padding: 0 20px;
-                    }
-
-                    .puzzle-progress-container {
-                        margin-top: 5px;
-                        display: flex;
-                        justify-content: space-between;
-                    }
-
-                    .progress-bar {
-                        background-color: ${Colors.PROGRESS_BAR_COLOR};
-                        width: 100%;
-                        height: 3px;
-                        transition: width 1s;
-                    }
-                `}</style>
-            </div>
-        );
+        target = target.parentNode;
     }
 }
 
-const Pearl = ({ caption, index, activeIndex, isClickable, onPearlClick }) => {
+const PearlThread = ({ items = [], activeIndex = 0, onPearlClick }) => {
+    const progressPercentage = (activeIndex / (items.length - 1)) * 100;
+    const isClickable = typeof onPearlClick === 'function';
+    const onContainerClick = isClickable ? onPearlThreadClick.bind(null, onPearlClick) : null;
+
+    return (
+        <div className="pearl-thread">
+            <div className="progress-bar" style={{ width: `${progressPercentage}%` }} ></div>
+
+            <div className="puzzle-progress-container"
+                onClick={onContainerClick}>
+                {items.map((item, index) => Pearl({
+                    caption: item.caption,
+                    index,
+                    activeIndex,
+                    isClickable,
+                    onPearlClick,
+                }))}
+            </div>
+
+
+            <style jsx>{`
+                .pearl-thread {
+                    min-height: 60px;
+                    padding: 0 20px;
+                }
+
+                .puzzle-progress-container {
+                    margin-top: 5px;
+                    display: flex;
+                    justify-content: space-between;
+                }
+
+                .progress-bar {
+                    background-color: ${Colors.PROGRESS_BAR_COLOR};
+                    width: 100%;
+                    height: 3px;
+                    transition: width 1s;
+                }
+            `}</style>
+        </div>
+    );
+}
+
+const Pearl = ({ caption, index, activeIndex, isClickable }) => {
     let content;
 
     if (index < activeIndex) {
@@ -64,41 +79,41 @@ const Pearl = ({ caption, index, activeIndex, isClickable, onPearlClick }) => {
         'clickable': isClickable,
     });
 
-    return (<div
-        className={itemClass}
-        onClick={isClickable ? onPearlClick.bind(null, index) : null}>
+    return (
+        <div className={itemClass} data-pearl-index={index}>
 
-        { content }
+            { content }
 
-        <style jsx>{`
-            .pearl {
-                width: 25px;
-                height: 25px;
-                line-height: 29px;
-                text-align: center;
-                color: ${Colors.UNSOLVED_PEARL_COLOR};
-            }
+            <style jsx>{`
+                .pearl {
+                    width: 25px;
+                    height: 25px;
+                    line-height: 29px;
+                    text-align: center;
+                    color: ${Colors.UNSOLVED_PEARL_COLOR};
+                }
 
-            .pearl.solved {
-                border: 2px solid #4c8580;
-                border-radius: 50%;
-            }
+                .pearl.solved {
+                    border: 2px solid #4c8580;
+                    border-radius: 50%;
+                }
 
-            .pearl.solved,
-            .pearl.current {
-                color: ${Colors.SOLVED_PEARL_COLOR};
-            }
+                .pearl.solved,
+                .pearl.current {
+                    color: ${Colors.SOLVED_PEARL_COLOR};
+                }
 
-            .pearl.current {
-                transform: translateX(-50%);
-                white-space: nowrap;
-            }
+                .pearl.current {
+                    transform: translateX(-50%);
+                    white-space: nowrap;
+                }
 
-            .clickable {
-                cursor: pointer;
-            }
-        `}</style>
-    </div>);
+                .clickable {
+                    cursor: pointer;
+                }
+            `}</style>
+        </div>
+    );
 };
 
 export { PearlThread };

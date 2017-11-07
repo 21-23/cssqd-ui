@@ -9,7 +9,12 @@ storiesOf('PearlThread', module)
         <PearlThread
             items={new Array(12).fill({caption: 'Signing up'})}
             activeIndex={number('activeIndex', 5)}
-            isClickable={boolean('isClickable', false)}
+        />
+    ))
+    .add('clickable', () => (
+        <PearlThread
+            items={new Array(12).fill({caption: 'Signing up'})}
+            activeIndex={number('activeIndex', 5)}
             onPearlClick={console.log}
         />
     ));
