@@ -14,7 +14,7 @@ const config = {
             loader: 'babel-loader',
             exclude: /node_modules/,
         }, {
-            test: /(.png$)/,
+            test: /(\.(png|jpg)$)/,
             loader: 'url-loader',
         }]
     }
