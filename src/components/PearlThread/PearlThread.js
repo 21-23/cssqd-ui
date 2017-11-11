@@ -19,12 +19,13 @@ function onPearlThreadClick(onPearlClick, event) {
 
 const PearlThread = ({ items = [], activeIndex = 0, onPearlClick }) => {
     const progressPercentage = (activeIndex / (items.length - 1)) * 100;
+    const safeProgressPercentage = Math.min(progressPercentage, 100);
     const isClickable = typeof onPearlClick === 'function';
     const onContainerClick = isClickable ? onPearlThreadClick.bind(null, onPearlClick) : null;
 
     return (
         <div className="pearl-thread">
-            <div className="progress-bar" style={{ width: `${progressPercentage}%` }} ></div>
+            <div className="progress-bar" style={{ width: `${safeProgressPercentage}%` }} ></div>
 
             <div className="puzzle-progress-container"
                 onClick={onContainerClick}>
@@ -86,9 +87,10 @@ const Pearl = ({ caption, index, activeIndex, isClickable }) => {
 
             <style jsx>{`
                 .pearl {
+                    box-sizing: border-box;
                     width: 25px;
                     height: 25px;
-                    line-height: 29px;
+                    line-height: 25px;
                     text-align: center;
                     color: ${Colors.UNSOLVED_PEARL_COLOR};
                 }
@@ -104,7 +106,8 @@ const Pearl = ({ caption, index, activeIndex, isClickable }) => {
                 }
 
                 .pearl.current {
-                    transform: translateX(-50%);
+                    width: auto;
+                    min-width: 25px;
                     white-space: nowrap;
                 }
 
