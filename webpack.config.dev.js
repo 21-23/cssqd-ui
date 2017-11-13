@@ -15,7 +15,7 @@ const ownConfig = {
 ownConfig.entry = apps.reduce((entries, appName) => {
     entries[appName] = [
         `./src/${appName}/${appName}.index.js`,
-        `./scenarios/${appName}/index.js`,
+        `./scenarios/${appName}`,
     ];
     return entries;
 }, {});
@@ -23,7 +23,8 @@ ownConfig.entry = apps.reduce((entries, appName) => {
 ownConfig.plugins = apps.map(appName => new HTMLWebpackPlugin({
     chunks: [appName],
     title: `${appName.charAt(0).toUpperCase()}${appName.substring(1)}`,
-    filename: `${appName}.html`
+    filename: `${appName}.html`,
+    template: './src/index.tpl.html',
 }));
 
 module.exports = merge(baseConfig, ownConfig);
