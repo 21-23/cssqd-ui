@@ -6,5 +6,6 @@ require('../src/components/BannedCharacters/BannedCharacters.story.js');
 require('../src/components/Scoreboard/Scoreboard.story.js');
 require('../src/components/PuzzleTitle/PuzzleTitle.story.js');
 require('../src/components/RoundStartCountdown/RoundStartCountdown.story.js');
+require('../src/components/PearlThread/PearlThread.story.js');
 require('../src/components/WaitScreen/WaitScreen.story.js');
 require('../src/components/AuthButton/AuthButton.story.js');
