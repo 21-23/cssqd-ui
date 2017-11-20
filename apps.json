@@ -1,5 +1,6 @@
 [
-  "game",
-  "game-master",
-  "login"
+  { "chunk": "game", "title": "Game", "filename": "game" },
+  { "chunk": "game-master", "title": "Game master", "filename": "game-master" },
+  { "chunk": "login", "title": "Login", "filename": "login" },
+  { "chunk": "landing", "title": "CSS Quick Draw", "filename": "index" }
 ]

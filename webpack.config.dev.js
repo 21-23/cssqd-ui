@@ -12,18 +12,18 @@ const ownConfig = {
     },
 };
 
-ownConfig.entry = apps.reduce((entries, appName) => {
-    entries[appName] = [
-        `./src/${appName}/${appName}.index.js`,
-        `./scenarios/${appName}`,
+ownConfig.entry = apps.reduce((entries, app) => {
+    entries[app.chunk] = [
+        `./src/${app.chunk}/${app.chunk}.index.js`,
+        `./scenarios/${app.chunk}`,
     ];
     return entries;
 }, {});
 
-ownConfig.plugins = apps.map(appName => new HTMLWebpackPlugin({
-    chunks: [appName],
-    title: `${appName.charAt(0).toUpperCase()}${appName.substring(1)}`,
-    filename: `${appName}.html`,
+ownConfig.plugins = apps.map(app => new HTMLWebpackPlugin({
+    chunks: [app.chunk],
+    title: `${app.title}`,
+    filename: `${app.filename}.html`,
     template: './src/index.tpl.html',
 }));
 
