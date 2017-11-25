@@ -9,3 +9,4 @@ require('../src/components/RoundStartCountdown/RoundStartCountdown.story.js');
 require('../src/components/PearlThread/PearlThread.story.js');
 require('../src/components/WaitScreen/WaitScreen.story.js');
 require('../src/components/AuthButton/AuthButton.story.js');
+require('../src/components/CorrectSolution/CorrectSolution.story.js');
