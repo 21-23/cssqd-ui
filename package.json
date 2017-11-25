@@ -26,6 +26,8 @@
   "homepage": "https://github.com/21-23/cssqd-ui#readme",
   "dependencies": {
     "classnames": "^2.2.5",
+    "message-factory": "git+https://github.com/21-23/message-factory.git",
+    "phoenix-middleware": "git+https://github.com/21-23/phoenix-middleware.git",
     "preact": "^8.2.5",
     "preact-redux": "^2.0.3",
     "react-fontawesome": "^1.6.1",

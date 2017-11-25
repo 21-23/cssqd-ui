@@ -3,6 +3,7 @@ import { connect } from 'preact-redux';
 import { createStructuredSelector } from 'reselect';
 
 import { RoundLayout } from '../components/RoundLayout';
+import { PearlThread } from '../../components/PearlThread/PearlThread';
 import { Countdown } from '../../components/Countdown/Countdown';
 import { SelectorInput } from '../../components/SelectorInput/SelectorInput';
 import { MarkupRenderer } from '../../components/MarkupRenderer/MarkupRenderer';
@@ -24,6 +25,7 @@ import {
     markup,
     index as puzzleIndex,
     title as puzzleTitle,
+    puzzlesCount,
 } from '../../shared/selectors/puzzle-selectors';
 import { selector, selection } from '../selectors/solution-selectors';
 import { highlightedBannedChars } from '../selectors/round-selectors';
@@ -43,8 +45,14 @@ const PureRound = ({
     highlightedBannedChars,
     puzzleIndex,
     puzzleTitle,
+    puzzlesCount,
 }) => (
     <RoundLayout>
+        <PearlThread
+            itemsCount={puzzlesCount}
+            activeIndex={puzzleIndex - 1}
+            activeTitle={puzzleTitle}
+        />
         <PuzzleTitle
             index={puzzleIndex}
             title={puzzleTitle}
@@ -91,6 +99,7 @@ const RoundContainer = connect(createStructuredSelector({
     highlightedBannedChars,
     puzzleIndex,
     puzzleTitle,
+    puzzlesCount,
 }), {
     setSelector,
 })(PureRound);

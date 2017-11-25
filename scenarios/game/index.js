@@ -6,7 +6,7 @@ import { setPuzzle } from './puzzle';
 import * as RoundPhaseActions from '../../src/shared/actions/round-phase-actions';
 import { DURATION } from '../../src/shared/constants/round';
 
-(async () => {
+window.gameScenario = async () => {
     await pause(2000);
 
     setPuzzle({
@@ -43,4 +43,4 @@ import { DURATION } from '../../src/shared/constants/round';
     ]);
 
     store.dispatch(RoundPhaseActions.finishRound());
-})();
+};
