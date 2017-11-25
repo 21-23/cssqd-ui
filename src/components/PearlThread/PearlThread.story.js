@@ -19,11 +19,4 @@ storiesOf('PearlThread', module)
             activeTitle={text('activeTitle', 'Lorem ipsum dolor')}
             onPearlClick={console.log}
         />
-    ))
-    .add('overpopulated', () => (
-        <PearlThread
-            itemsCount={10}
-            activeIndex={number('activeIndex', 5)}
-            activeTitle={text('activeTitle', 'Lorem')}
-        />
     ));
