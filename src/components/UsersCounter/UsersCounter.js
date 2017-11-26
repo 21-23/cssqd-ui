@@ -27,7 +27,7 @@ const UsersCounter = ({ count, label }) => (
                 display: flex;
                 flex-direction: column;
                 font-size: 0.6em;
-                align-items: center;
+                align-items: flex-start;
             }
 
         `}</style>
