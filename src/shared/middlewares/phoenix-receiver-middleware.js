@@ -1,5 +1,5 @@
 import { MESSAGE } from 'phoenix-middleware';
-import { protocol } from 'message-factory';
+import { protocol, parseMessage } from 'message-factory';
 import { startCountdown, startRound, finishRound } from '../actions/round-phase-actions';
 import { setTimeRemaining } from '../actions/countdown-actions';
 import { receivePuzzle, receivePuzzlesCount } from '../actions/puzzle-actions';
@@ -19,7 +19,7 @@ export const phoenixReceiverMiddleware = store => next => action => {
         return next(action);
     }
 
-    const { message } = JSON.parse(action.payload.data);
+    const { message } = parseMessage(action.payload.data);
 
     let newAction;
     const state = store.getState();

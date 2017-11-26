@@ -1,5 +1,5 @@
 import { SEND, MESSAGE } from 'phoenix-middleware';
-import { protocol } from 'message-factory';
+import { protocol, parseMessage } from 'message-factory';
 
 import { SET_SELECTOR, setSelection, setSelector } from '../actions/solution-actions';
 
@@ -18,7 +18,7 @@ export const phoenixSolutionMiddleware = state => next => action => {
         return next(action);
     }
 
-    const { message } = JSON.parse(action.payload.data);
+    const { message } = parseMessage(action.payload.data);
 
     if (message.name === MESSAGE_NAME.solutionEvaluated) {
         const selectionAction = setSelection({
