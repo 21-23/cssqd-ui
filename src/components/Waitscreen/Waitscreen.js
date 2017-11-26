@@ -3,7 +3,7 @@ import { h } from 'preact';
 const backgroundImage = require('../../assets/images/waitscreen.jpg');
 const paperImage = require('../../assets/images/paper.png');
 
-const WaitScreen = () => (
+const Waitscreen = () => (
     <div className="waitscreen">
         <div className="text-content">
             <p>Keep calm, cowboy!</p>
@@ -45,4 +45,4 @@ const WaitScreen = () => (
     </div>
 );
 
-export { WaitScreen };
+export { Waitscreen };

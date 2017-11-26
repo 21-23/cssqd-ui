@@ -4,12 +4,12 @@ import { createStructuredSelector } from 'reselect';
 
 import { isWaiting } from '../../shared/selectors/round-phase-selectors';
 import { AppContainer } from '../../shared/containers/AppContainer';
-import { WaitScreen } from '../../components/Waitscreen/Waitscreen';
+import { Waitscreen } from '../../components/Waitscreen/Waitscreen';
 import { RoundContainer } from './RoundContainer';
 
 const PureGameContainer = ({ isWaiting }) => (
     <AppContainer>
-        { isWaiting ? <WaitScreen /> : <RoundContainer /> }
+        { isWaiting ? <Waitscreen /> : <RoundContainer /> }
     </AppContainer>
 );
 
