@@ -2,104 +2,65 @@ import { h } from 'preact';
 import { connect } from 'preact-redux';
 import { createStructuredSelector } from 'reselect';
 
+import { PearlThreadContainer } from '../../shared/containers/PearlThreadContainer';
+import { PuzzleTitleContainer } from '../../shared/containers/PuzzleTitleContainer';
+import { BannedCharactersContainer } from '../../shared/containers/BannedCharactersContainer';
+import { MarkupRendererContainer } from '../../shared/containers/MarkupRendererContainer';
+import { CountdownContainer } from '../../shared/containers/CountdownContainer';
+import { RoundStartCountdownContainer } from '../../shared/containers/RoundStartCountdownContainer';
+
 import { RoundLayout } from '../components/RoundLayout';
-import { PearlThread } from '../../components/PearlThread/PearlThread';
-import { Countdown } from '../../components/Countdown/Countdown';
 import { SelectorInput } from '../../components/SelectorInput/SelectorInput';
-import { MarkupRenderer } from '../../components/MarkupRenderer/MarkupRenderer';
-import { withDotSelectionIndicator } from '../../components/MarkupRenderer/with-dot-selection-indicator';
-import { Line } from '../../components/MarkupRenderer/Line';
-import { BannedCharacters } from '../../components/BannedCharacters/BannedCharacters';
-import { PuzzleTitle } from '../../components/PuzzleTitle/PuzzleTitle';
-import { RoundStartCountdown } from '../../components/RoundStartCountdown/RoundStartCountDown';
-
-
-import * as RoundPhase from '../../shared/constants/round-phase';
-import { DURATION } from '../../shared/constants/round';
 
 import { roundStarted, roundFinished } from '../../shared/selectors/round-phase-selectors';
-import { countdown } from '../../shared/selectors/countdown-selectors';
-import {
-    expectedSelection,
-    bannedChars,
-    markup,
-    index as puzzleIndex,
-    title as puzzleTitle,
-    puzzlesCount,
-} from '../../shared/selectors/puzzle-selectors';
-import { selector, selection } from '../selectors/solution-selectors';
+
+import { selector, selection, isCorrect } from '../selectors/solution-selectors';
 import { highlightedBannedChars } from '../selectors/round-selectors';
 
 import { setSelector } from '../actions/solution-actions';
 
+
 const PureRound = ({
     roundStarted,
     roundFinished,
-    timeRemaining,
     selector,
     setSelector,
-    markup,
-    expectedSelection,
-    actualSelection,
-    bannedChars,
+    selection,
     highlightedBannedChars,
-    puzzleIndex,
-    puzzleTitle,
-    puzzlesCount,
+    isCorrect,
 }) => (
     <RoundLayout>
-        <PearlThread
-            itemsCount={puzzlesCount}
-            activeIndex={puzzleIndex - 1}
-            activeTitle={puzzleTitle}
-        />
-        <PuzzleTitle
-            index={puzzleIndex}
-            title={puzzleTitle}
-        />
+        <PearlThreadContainer key="PearlThread" />
+        <PuzzleTitleContainer key="PuzzleTitle" />
         <SelectorInput
             value={selector}
-            disabled={!roundStarted || roundFinished}
+            disabled={!roundStarted || roundFinished || isCorrect}
             onInput={setSelector}
         />
 
-        <BannedCharacters
-            bannedCharacters={ roundStarted ? bannedChars : null }
+        <BannedCharactersContainer
+            key="BannedCharacters"
             highlightedCharacters={ roundStarted ? highlightedBannedChars : null }
         />
 
-        { !roundStarted ? null :
-            <Countdown
-                timeAmount={DURATION}
-                timeRemaining={timeRemaining}
-            />
-        }
+        <CountdownContainer key="Countdown" />
 
-        { !roundStarted ? null :
-            <MarkupRenderer
-                source={markup}
-                expectedSelection={expectedSelection}
-                actualSelection={actualSelection}
-            />
-        }
+        <MarkupRendererContainer
+            key="MarkupRenderer"
+            actualSelection={selection}
+        />
 
-        { (roundStarted || roundFinished) ? null : <RoundStartCountdown timeRemaining={timeRemaining} /> }
+        <RoundStartCountdownContainer key="RoundStartCountdown" />
     </RoundLayout>
 );
 
 const RoundContainer = connect(createStructuredSelector({
     roundStarted,
     roundFinished,
-    timeRemaining: countdown,
-    markup,
-    expectedSelection,
     actualSelection: selection,
     selector,
-    bannedChars,
     highlightedBannedChars,
-    puzzleIndex,
-    puzzleTitle,
-    puzzlesCount,
+    isCorrect,
 }), {
     setSelector,
 })(PureRound);

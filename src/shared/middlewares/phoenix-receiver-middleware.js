@@ -47,8 +47,9 @@ export const phoenixReceiverMiddleware = store => next => action => {
             newAction = receivePuzzle({
                 ...currentPuzzle,
                 title: message.puzzleName,
-                index: message.puzzleIndex + 1,
+                index: message.puzzleIndex,
                 bannedChars: message.puzzleOptions.bannedCharacters,
+                timeLimit: message.puzzleOptions.timeLimit,
             });
             break;
         }
@@ -60,12 +61,14 @@ export const phoenixReceiverMiddleware = store => next => action => {
                 ...currentPuzzle,
                 markup : message.input,
                 bannedChars: message.puzzleOptions.bannedCharacters,
+                timeLimit: message.puzzleOptions.timeLimit,
                 expectedSelection: JSON.parse(message.expected),
             });
             break;
         }
 
-        case MESSAGE_NAME.playerSessionState: {
+        case MESSAGE_NAME.playerSessionState:
+        case MESSAGE_NAME.gameMasterSessionState: {
             spreadSessionState(store, message);
             break;
         }
@@ -85,9 +88,10 @@ function spreadSessionState(store, message) {
         message.puzzle && receivePuzzle({
             markup : message.puzzle.input,
             bannedChars: message.puzzle.options.bannedCharacters,
+            timeLimit: message.puzzle.options.timeLimit,
             expectedSelection: JSON.parse(message.puzzle.expected),
             title: message.puzzle.name,
-            index: message.puzzleIndex + 1,
+            index: message.puzzleIndex,
         }),
         receivePuzzlesCount(message.puzzleCount),
     ]
