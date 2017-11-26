@@ -15,9 +15,15 @@ storiesOf('Button', module)
             `}</style>
         </div>
     ))
-    .add('default', () => (
+    .add('Stop level', () => (
         <Button
-            icon="stop"
-            text="Stop round"
+            iconLeft="stop"
+            text="Stop level"
+        />
+    ))
+    .add('Next level', () => (
+        <Button
+            iconRight="arrow-right"
+            text="Next level"
         />
     ));
