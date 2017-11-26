@@ -1,4 +1,5 @@
 import * as Actions from '../actions/puzzle-actions';
+import { DURATION } from '../constants/round';
 
 const initialState = {
     currentPuzzle: {
@@ -7,6 +8,7 @@ const initialState = {
         expectedSelection: [],
         title: '',
         index: -1,
+        timeLimit: DURATION,
     },
     puzzlesCount: 0,
 };
@@ -22,6 +24,7 @@ export function puzzleReducer(state = initialState, action) {
                     markup: action.payload.markup,
                     bannedChars: action.payload.bannedChars,
                     expectedSelection: action.payload.expectedSelection,
+                    timeLimit: action.payload.timeLimit,
                 }
             };
 

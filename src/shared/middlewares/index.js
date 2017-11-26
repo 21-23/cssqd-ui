@@ -14,5 +14,5 @@ const phoenixMiddleware = createPhoenixMiddleware({
 export const sharedMiddlewares = [
     phoenixMiddleware,
     phoenixReceiverMiddleware,
-    logger,
+    // logger,
 ];

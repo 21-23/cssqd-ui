@@ -7,7 +7,7 @@ export function withGroupedChildren(Component) {
                 return grouped;
             }
 
-            grouped[child.nodeName.name] = child;
+            grouped[child.key || child.nodeName.name] = child;
             return grouped;
         }, {});
 

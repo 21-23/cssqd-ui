@@ -3,6 +3,7 @@ import { withGroupedChildren } from '../../components/with-grouped-children-hoc'
 
 const PureRoundLayout = ({ components }) => (
     <div className="app-root">
+        { components.PearlThread }
         { components.PuzzleTitle }
         { components.BannedCharacters }
         <div className="panel">

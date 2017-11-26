@@ -1,7 +1,7 @@
 import { SEND, MESSAGE } from 'phoenix-middleware';
 import { protocol, parseMessage } from 'message-factory';
 
-import { SET_SELECTOR, setSelection, setSelector } from '../actions/solution-actions';
+import { SET_SELECTOR, setSelection, setSelector, clearSelector } from '../actions/solution-actions';
 
 const { MESSAGE_NAME } = protocol.ui;
 const CORRECT_SOLUTION_KEY = 'correct';
@@ -27,6 +27,11 @@ export const phoenixSolutionMiddleware = state => next => action => {
         });
 
         store.dispatch(selectionAction);
+    }
+
+    if (message.name === MESSAGE_NAME.puzzleChanged) {
+        const clearSelectorAction = clearSelector();
+        store.dispatch(clearSelectorAction);
     }
 
     if (message.name === MESSAGE_NAME.playerSessionState && message.solution) {

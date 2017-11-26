@@ -14,6 +14,9 @@ export function solutionReducer(state = initialState, action) {
                 selector: action.payload,
             };
 
+        case Actions.CLEAR_SELECTOR:
+            return initialState;
+
         case Actions.SET_SELECTION:
             return {
                 ...state,
