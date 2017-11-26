@@ -12,6 +12,7 @@ const RoundLayout = ({ children }) => {
 
     return (
         <div className="app-root">
+            { components.PearlThread }
             { components.PuzzleTitle }
             { components.BannedCharacters }
             <div className="panel">
