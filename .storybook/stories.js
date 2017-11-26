@@ -11,3 +11,5 @@ require('../src/components/WaitScreen/WaitScreen.story.js');
 require('../src/components/AuthButton/AuthButton.story.js');
 require('../src/components/CorrectSolution/CorrectSolution.story.js');
 require('../src/components/Button/Button.story.js');
+require('../src/components/UsersCounter/UsersCounter.story.js');
+
