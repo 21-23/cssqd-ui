@@ -1,9 +1,9 @@
 import { h } from 'preact';
 import { storiesOf } from '@storybook/react';
 
-import { WaitScreen } from './WaitScreen';
+import { Waitscreen } from './Waitscreen';
 
-storiesOf('WaitScreen', module)
+storiesOf('Waitscreen', module)
     .add('default', () => (
-        <WaitScreen />
+        <Waitscreen />
     ));
