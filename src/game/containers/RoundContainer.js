@@ -57,7 +57,7 @@ const PureRound = ({
 const RoundContainer = connect(createStructuredSelector({
     roundStarted,
     roundFinished,
-    actualSelection: selection,
+    selection,
     selector,
     highlightedBannedChars,
     isCorrect,

@@ -77,6 +77,8 @@ export const phoenixReceiverMiddleware = store => next => action => {
     if (newAction) {
         store.dispatch(newAction);
     }
+
+    return next(action);
 }
 
 function spreadSessionState(store, message) {

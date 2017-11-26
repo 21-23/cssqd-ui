@@ -27,6 +27,7 @@ const PureGameMasterLayout = ({ components }) => (
             </div>
 
             <div className="scoreboard-container">
+                { components.Scoreboard }
             </div>
         </div>
 
@@ -49,8 +50,9 @@ const PureGameMasterLayout = ({ components }) => (
             }
 
             .content-container {
-                flex: 2;
+                flex: 3;
                 flex-direction: column;
+                margin-right: 40px;
             }
 
             .content-header {
@@ -72,7 +74,8 @@ const PureGameMasterLayout = ({ components }) => (
             }
 
             .scoreboard-container {
-                flex: 1;
+                flex: 2;
+                flex-direction: column;
             }
 
             .content {

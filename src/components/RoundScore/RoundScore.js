@@ -24,9 +24,8 @@ function generateEntries(score) {
                         color: ${holyWhite};
                         border-bottom: 1px solid ${superLightGreen};
                     }
-                    .score-entry:hover {
-                        background: ${secondaryActionColor};
-                        cursor: pointer;
+                    .-solved {
+                        color: ${winningGreen};
                     }
                     .-name {
                         flex: 1 1 33.3%;

@@ -16,7 +16,7 @@ import { BannedCharactersContainer } from '../../shared/containers/BannedCharact
 import { MarkupRendererContainer } from '../../shared/containers/MarkupRendererContainer';
 import { RoundStartCountdownContainer } from '../../shared/containers/RoundStartCountdownContainer';
 import { CountdownContainer } from '../../shared/containers/CountdownContainer';
-
+import { ScoreboardContainer } from './ScoreboardContainer';
 
 const PureGameMasterContainer = ({ setPuzzleIndex }) => (
     <AppContainer>
@@ -32,6 +32,7 @@ const PureGameMasterContainer = ({ setPuzzleIndex }) => (
             <MarkupRendererContainer key="MarkupRenderer" />
             <RoundStartCountdownContainer key="RoundStartCountdown" />
             <CountdownContainer key="Countdown" />
+            <ScoreboardContainer key="Scoreboard" />
         </GameMasterLayout>
     </AppContainer>
 );
