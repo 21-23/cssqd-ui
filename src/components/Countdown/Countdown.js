@@ -55,12 +55,16 @@ class Countdown extends Component {
         const from = prevProps.timeRemaining / timeAmount;
         const to = this.props.timeRemaining / timeAmount;
 
-        const animation = new Animation({ from, to, duration });
+        this.animation = new Animation({ from, to, duration });
 
-        animation.animate(v => {
+        this.animation.animate(v => {
             this.progressArc.props.progress = v;
             this.canvas._render();
         });
+    }
+
+    componentWillUnmount() {
+        this.animation.stopAnimation();
     }
 }
 

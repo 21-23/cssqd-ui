@@ -1,12 +1,26 @@
 import { SEND, MESSAGE } from 'phoenix-middleware';
-import { protocol } from 'message-factory';
+import { protocol, parseMessage } from 'message-factory';
 
 import { SET_PUZZLE_INDEX } from '../actions/gm-puzzle-actions';
 import { START_COUNTDOWN } from '../../shared/actions/round-phase-actions';
 import { TRIGGER_ROUND_START, TRIGGER_ROUND_END } from '../actions/gm-round-phase-actions';
+import {
+    joinParticipant,
+    receiveParticipants,
+    removeParticipant,
+    setParticipantSolution,
+    resetSolutions
+} from '../actions/participant-actions';
+
+const { MESSAGE_NAME } = protocol.ui;
 
 export const phoenixGMMiddleware = store => next => action => {
     handleClientAction(store, action);
+
+    if (action.type === MESSAGE) {
+        const { message } = parseMessage(action.payload.data);
+        handleServerMessage(store, message);
+    }
 
     return next(action);
 };
@@ -35,4 +49,46 @@ function send(store, payload) {
         type: SEND,
         payload,
     });
+}
+
+function handleServerMessage(store, message) {
+    let action;
+
+    switch (message.name) {
+        case MESSAGE_NAME.gameMasterSessionState:
+        case MESSAGE_NAME.score: {
+            action = receiveParticipants(message.players);
+            break;
+        }
+
+        case MESSAGE_NAME.participantJoined: {
+            action = joinParticipant({
+                displayName: message.displayName,
+                participantId: message.participantId,
+            });
+            break;
+        }
+
+        case MESSAGE_NAME.participantLeft: {
+            action = removeParticipant({ participantId: message.participantId });
+            break;
+        }
+
+        case MESSAGE_NAME.participantSolution: {
+            action = setParticipantSolution({
+                participantId: message.participantId,
+                correct: message.correct,
+                time: message.time,
+                length: message.length,
+            });
+            break;
+        }
+
+        case MESSAGE_NAME.puzzle: {
+            action = resetSolutions();
+            break;
+        }
+    }
+
+    action && store.dispatch(action);
 }

@@ -4,15 +4,16 @@ import { createStructuredSelector } from 'reselect';
 
 import { BannedCharacters } from '../../components/BannedCharacters/BannedCharacters';
 
-import { roundStarted } from '../selectors/round-phase-selectors';
+import { roundStarted, roundFinished } from '../selectors/round-phase-selectors';
 import { bannedChars } from '../selectors/puzzle-selectors';
 
 const BannedCharactersContainer = connect(createStructuredSelector({
     roundStarted,
+    roundFinished,
     bannedChars,
-}))(({ roundStarted, bannedChars, ...rest }) => (
+}))(({ roundStarted, roundFinished, bannedChars, ...rest }) => (
     <BannedCharacters
-        bannedCharacters={ roundStarted ? bannedChars : null }
+        bannedCharacters={ (roundStarted || roundFinished) ? bannedChars : null }
         {...rest}
     />
 ));

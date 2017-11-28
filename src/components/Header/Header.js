@@ -6,8 +6,8 @@ const Header = ({ productName, username, backgroundImageUrl }) => (
         <span>{ productName }</span>
 
         <span>
-            <Icon name="user" className="user-icon" />
-            { username }
+            <Icon name="user" />
+            <span className="username">{ username }</span>
         </span>
         <style jsx>{`
             header {
@@ -23,8 +23,8 @@ const Header = ({ productName, username, backgroundImageUrl }) => (
                 flex-basis: 50px;
             }
 
-            .user-icon {
-                margin-right: 5px;
+            .username {
+                margin-left: 10px;
             }
         `}</style>
     </header>
