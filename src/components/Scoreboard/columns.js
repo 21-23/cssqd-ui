@@ -1,4 +1,4 @@
-import { formatScoreTime } from 'shared/formatters';
+import { formatScoreTime } from '../../shared/formatters';
 
 export const ColumnsMap = {
     NAME: {

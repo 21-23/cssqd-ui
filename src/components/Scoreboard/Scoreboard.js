@@ -2,9 +2,7 @@ import _ from 'lodash';
 import { h, Component } from 'preact';
 import Icon from 'react-fontawesome';
 
-import { RoundScore } from "components/RoundScore/RoundScore";
-import { AggregateScore } from "components/AggregateScore/AggregateScore";
-import { winningGreen, superLightGreen } from 'styles/colour-palette'
+import { winningGreen, superLightGreen } from '../../styles/color-palette'
 import { UsersCounter } from '../UsersCounter/UsersCounter';
 import { Table } from './Table';
 import { ColumnsMap } from './columns';
