@@ -36,6 +36,7 @@ const PureRound = ({
             value={selector}
             disabled={!roundStarted || roundFinished || isCorrect}
             onInput={setSelector}
+            key="SelectorInput"
         />
 
         <BannedCharactersContainer

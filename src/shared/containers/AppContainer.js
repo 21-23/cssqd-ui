@@ -15,6 +15,6 @@ const PureAppContainer = ({ children, ready }) => (
 
 const AppContainer = connect(createStructuredSelector({
     ready: state => state.username !== '',
-}));
+}))(PureAppContainer);
 
 export { AppContainer };

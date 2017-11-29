@@ -11,7 +11,7 @@ import { ColumnsMap } from './columns';
 const CORRECT_SOLUTION = 'correct';
 
 const isCorrectSolution = s => s.correct === CORRECT_SOLUTION;
-const getSolvedCount = items => items.filter(isCorrectSolution);
+const getSolvedCount = items => items.filter(isCorrectSolution).length;
 
 const Scoreboard = ({ visibleScore, roundScore, aggregateScore, toggleVisibleScoreType }) => (
     <div className="scoreboard-wrapper">

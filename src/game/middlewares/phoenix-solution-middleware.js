@@ -6,7 +6,7 @@ import { SET_SELECTOR, setSelection, setSelector, clearSelector } from '../actio
 const { MESSAGE_NAME } = protocol.ui;
 const CORRECT_SOLUTION_KEY = 'correct';
 
-export const phoenixSolutionMiddleware = state => next => action => {
+export const phoenixSolutionMiddleware = store => next => action => {
     if (action.type === SET_SELECTOR) {
         store.dispatch({
             type: SEND,
