@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { h, Component } from 'preact';
 import classNames from 'classnames';
 import Icon from 'react-fontawesome';
@@ -62,7 +63,7 @@ const TitlePearl = ({ isFirst, isLast, title }) => {
     );
 }
 
-const Pearl = ({ isPast, index, title, isFirst, isLast, onClick }) => {
+const Pearl = ({ isPast, index, title, isFirst, isLast, onClick = _.noop }) => {
     let content = <FuturePearl index={index + 1} />;
 
     if (isPast) {
