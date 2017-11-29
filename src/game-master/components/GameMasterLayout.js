@@ -10,10 +10,8 @@ const PureGameMasterLayout = ({ components }) => (
                 <div className="content-header">
                     <div className="puzzle-attributes">
                         { components.PuzzleTitle }
-                        { components.RoundPhaseButton }
-                        <p>
-                            { components.BannedCharacters }
-                        </p>
+                        <p>{ components.RoundPhaseButton }</p>
+                        <p>{ components.BannedCharacters }</p>
                     </div>
                     <div className="countdown-container">
                         { components.Countdown }
@@ -39,10 +37,15 @@ const PureGameMasterLayout = ({ components }) => (
                 flex-direction: column;
             }
 
+            p {
+                margin: 5px 0;
+            }
+
             .game-master-content {
                 flex: 1;
                 display: flex;
                 flex-direction: row;
+                padding-bottom: 20px;
             }
 
             .content-container, .scoreboard-container {
@@ -50,13 +53,14 @@ const PureGameMasterLayout = ({ components }) => (
             }
 
             .content-container {
-                flex: 3;
+                flex: 3 0 auto;
                 flex-direction: column;
                 margin-right: 40px;
             }
 
             .content-header {
                 display: flex;
+                flex-shrink: 0;
                 flex-direction: row;
             }
 
@@ -74,8 +78,9 @@ const PureGameMasterLayout = ({ components }) => (
             }
 
             .scoreboard-container {
-                flex: 2;
+                flex: 2 0 auto;
                 flex-direction: column;
+                max-width: 35%;
             }
 
             .content {

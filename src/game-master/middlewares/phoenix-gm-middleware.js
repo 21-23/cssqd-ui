@@ -1,7 +1,7 @@
 import { SEND, MESSAGE } from 'phoenix-middleware';
 import { protocol, parseMessage } from 'message-factory';
 
-import { SET_PUZZLE_INDEX } from '../actions/gm-puzzle-actions';
+import { SET_PUZZLE_INDEX, setPuzzleIndex } from '../actions/gm-puzzle-actions';
 import { START_COUNTDOWN } from '../../shared/actions/round-phase-actions';
 import { TRIGGER_ROUND_START, TRIGGER_ROUND_END } from '../actions/gm-round-phase-actions';
 import {
@@ -53,6 +53,10 @@ function send(store, payload) {
 
 function handleServerMessage(store, message) {
     let action;
+
+    if (MESSAGE_NAME.gameMasterSessionState && message.puzzleIndex === null) {
+        store.dispatch(setPuzzleIndex(0));
+    }
 
     switch (message.name) {
         case MESSAGE_NAME.gameMasterSessionState:
