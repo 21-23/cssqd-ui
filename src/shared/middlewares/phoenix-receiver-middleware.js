@@ -5,19 +5,14 @@ import { setTimeRemaining } from '../actions/countdown-actions';
 import { receivePuzzle, receivePuzzlesCount } from '../actions/puzzle-actions';
 import { receiveUser } from '../actions/user-actions';
 import { puzzle } from '../selectors/puzzle-selectors';
+import * as RoundPhase from '../constants/round-phase';
 
 const { MESSAGE_NAME } = protocol.ui;
-
-const RoundPhase = {
-    COUNTDOWN: 'countdown',
-    IN_PROGRESS: 'in-progress',
-    END: 'end',
-}
 
 const roundPhaseToActionMap = {
     [RoundPhase.COUNTDOWN]: startCountdown,
     [RoundPhase.IN_PROGRESS]: startRound,
-    [RoundPhase.END]: finishRound,
+    [RoundPhase.FINISHED]: finishRound,
 };
 
 export const phoenixReceiverMiddleware = store => next => action => {
@@ -36,12 +31,12 @@ export const phoenixReceiverMiddleware = store => next => action => {
             action && store.dispatch(action);
 
 
-            if (message.roundPhase === RoundPhases.COUNTDOWN) {
+            if (message.roundPhase === RoundPhase.COUNTDOWN) {
                 const action = setTimeRemaining(3);
                 store.dispatch(action);
             }
 
-            if (message.roundPhase === RoundPhases.IN_PROGRESS) {
+            if (message.roundPhase === RoundPhase.IN_PROGRESS) {
                 const currentPuzzle = puzzle(state);
                 const action = setTimeRemaining(currentPuzzle.timeLimit);
 

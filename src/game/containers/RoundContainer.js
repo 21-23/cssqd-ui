@@ -44,7 +44,11 @@ const PureRound = ({
             highlightedCharacters={ roundStarted ? highlightedBannedChars : null }
         />
 
-        <CountdownContainer key="Countdown" />
+        <CountdownContainer
+            key="Countdown"
+            remainingTimeArcColor={isCorrect ? '#87c736' : '#f8d940'}
+            textFillColor={isCorrect ? '#87c736' : '#f8d940'}
+        />
 
         <MarkupRendererContainer
             key="MarkupRenderer"

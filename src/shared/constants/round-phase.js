@@ -1,3 +1,3 @@
-export const COUNTDOWN = 'COUNTDOWN';
-export const IN_PROGRESS = 'IN_PROGRESS';
-export const FINISHED = 'FINISHED';
+export const COUNTDOWN = 'countdown';
+export const IN_PROGRESS = 'in-progress';
+export const FINISHED = 'end';
