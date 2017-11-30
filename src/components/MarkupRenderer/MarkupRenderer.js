@@ -57,7 +57,7 @@ class MarkupRenderer extends Component {
 
         const lines = Array.from(this.container.children)
             .map(root => Array.from(traverse(root)))
-            .reduce((chunk, flat) => [...flat, ...chunk], []);
+            .reduce((flat, chunk) => [...flat, ...chunk], []);
 
         this.setState({ lines });
     }
