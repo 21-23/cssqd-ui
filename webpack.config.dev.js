@@ -1,6 +1,5 @@
 const path = require('path');
 const merge = require('webpack-merge');
-const HTMLWebpackPlugin = require('html-webpack-plugin');
 
 const apps = require('./apps.json');
 const baseConfig = require('./webpack.config.base');
@@ -19,12 +18,5 @@ ownConfig.entry = apps.reduce((entries, app) => {
     ];
     return entries;
 }, {});
-
-ownConfig.plugins = apps.map(app => new HTMLWebpackPlugin({
-    chunks: [app.chunk],
-    title: `${app.title}`,
-    filename: `${app.filename}.html`,
-    template: './src/index.tpl.html',
-}));
 
 module.exports = merge(baseConfig, ownConfig);

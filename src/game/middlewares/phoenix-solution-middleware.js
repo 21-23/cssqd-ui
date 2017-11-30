@@ -2,16 +2,32 @@ import { SEND, MESSAGE } from 'phoenix-middleware';
 import { protocol, parseMessage } from 'message-factory';
 
 import { SET_SELECTOR, setSelection, setSelector, clearSelector } from '../actions/solution-actions';
+import { setTimeRemaining, SET_TIME_REMAINING } from '../../shared/actions/countdown-actions';
+import { isCorrect as isCorrectSolution } from '../selectors/solution-selectors';
+import * as RoundPhase from '../../shared/constants/round-phase';
 
 const { MESSAGE_NAME } = protocol.ui;
 const CORRECT_SOLUTION_KEY = 'correct';
 
-export const phoenixSolutionMiddleware = state => next => action => {
+export const phoenixSolutionMiddleware = store => next => action => {
+    const state = store.getState();
+
     if (action.type === SET_SELECTOR) {
         store.dispatch({
             type: SEND,
             payload: protocol.frontService.solution(action.payload),
         });
+    }
+
+    if (action.type === SET_TIME_REMAINING && isCorrectSolution(state) && !action.meta.force) {
+        if (action.meta.force) {
+            return next({
+                ...action,
+                meta: { force: false },
+            });
+        }
+
+        return state;
     }
 
     if (action.type !== MESSAGE) {
@@ -29,18 +45,28 @@ export const phoenixSolutionMiddleware = state => next => action => {
         store.dispatch(selectionAction);
     }
 
-    if (message.name === MESSAGE_NAME.puzzleChanged) {
+    if (message.name === MESSAGE_NAME.roundPhaseChanged && message.roundPhase === RoundPhase.COUNTDOWN) {
         const clearSelectorAction = clearSelector();
         store.dispatch(clearSelectorAction);
     }
 
-    if (message.name === MESSAGE_NAME.playerSessionState && message.solution) {
-        const actions = [
-            setSelection({ isCorrect: message.solution.correct === CORRECT_SOLUTION_KEY }),
-            setSelector(message.solution.code),
-        ];
+    if (message.name === MESSAGE_NAME.playerSessionState
+        && message.solution
+        && message.roundPhase === RoundPhase.IN_PROGRESS
+    ) {
+        const isCorrect = message.solution.correct === CORRECT_SOLUTION_KEY;
 
-        actions.map(store.dispatch);
+        const actions = [
+            setSelection({ isCorrect }),
+            setSelector(message.solution.code),
+            isCorrect && setTimeRemaining(
+                Math.ceil(message.puzzle.options.timeLimit - message.solution.time),
+                true
+            ),
+        ]
+        .filter(Boolean);
+
+        actions.forEach(store.dispatch);
     }
 
     return next(action);

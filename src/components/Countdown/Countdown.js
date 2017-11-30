@@ -64,7 +64,7 @@ class Countdown extends Component {
     }
 
     componentWillUnmount() {
-        this.animation.stopAnimation();
+        this.animation && this.animation.stopAnimation();
     }
 }
 

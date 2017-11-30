@@ -5,10 +5,13 @@ const Header = ({ productName, username, backgroundImageUrl }) => (
     <header style={{ backgroundImage: `url(${backgroundImageUrl})` }}>
         <span>{ productName }</span>
 
-        <span>
-            <Icon name="user" />
-            <span className="username">{ username }</span>
-        </span>
+        { username ?
+            <span>
+                <Icon name="user" />
+                <span className="username">{ username }</span>
+            </span>
+            : null
+        }
         <style jsx>{`
             header {
                 padding: 10px;

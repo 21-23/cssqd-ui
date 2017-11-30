@@ -2,13 +2,20 @@ import { h } from 'preact';
 
 import * as Colors from './selector-input-color-palette';
 
-const SelectorInput = ({ onInput, disabled, value }) => (
+const SelectorInput = ({
+    onInput,
+    disabled,
+    value,
+    maxLength = 128,
+    placeholder = 'Enter your selector here...'
+}) => (
     <input
         type="text"
         onInput={e => onInput(e.target.value)}
         disabled={disabled}
-        placeholder="Enter your selector here..."
+        placeholder={placeholder}
         value={value}
+        maxLength={maxLength}
     >
         <style jsx>{`
             input {

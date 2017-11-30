@@ -5,13 +5,14 @@ import { setTimeRemaining } from '../actions/countdown-actions';
 import { receivePuzzle, receivePuzzlesCount } from '../actions/puzzle-actions';
 import { receiveUser } from '../actions/user-actions';
 import { puzzle } from '../selectors/puzzle-selectors';
+import * as RoundPhase from '../constants/round-phase';
 
 const { MESSAGE_NAME } = protocol.ui;
 
 const roundPhaseToActionMap = {
-    'countdown': startCountdown,
-    'in-progress': startRound,
-    'end': finishRound,
+    [RoundPhase.COUNTDOWN]: startCountdown,
+    [RoundPhase.IN_PROGRESS]: startRound,
+    [RoundPhase.FINISHED]: finishRound,
 };
 
 export const phoenixReceiverMiddleware = store => next => action => {
@@ -21,49 +22,68 @@ export const phoenixReceiverMiddleware = store => next => action => {
 
     const { message } = parseMessage(action.payload.data);
 
-    let newAction;
     const state = store.getState();
 
     switch (message.name) {
         case MESSAGE_NAME.roundPhaseChanged: {
             const creator = roundPhaseToActionMap[message.roundPhase];
-            newAction = creator && creator();
+            const action = creator && creator();
+            action && store.dispatch(action);
+
+
+            if (message.roundPhase === RoundPhase.COUNTDOWN) {
+                const action = setTimeRemaining(3);
+                store.dispatch(action);
+            }
+
+            if (message.roundPhase === RoundPhase.IN_PROGRESS) {
+                const currentPuzzle = puzzle(state);
+                const action = setTimeRemaining(currentPuzzle.timeLimit);
+
+                store.dispatch(action);
+            }
             break;
         }
 
         case MESSAGE_NAME.startCountdownChanged: {
-            newAction = setTimeRemaining(message.startCountdown);
+            const action = setTimeRemaining(message.startCountdown);
+            store.dispatch(action);
             break;
         }
 
         case MESSAGE_NAME.roundCountdownChanged: {
-            newAction = setTimeRemaining(message.roundCountdown);
+            const action = setTimeRemaining(message.roundCountdown);
+            store.dispatch(action);
             break;
         }
 
         case MESSAGE_NAME.puzzleChanged: {
             const currentPuzzle = puzzle(state);
 
-            newAction = receivePuzzle({
+            const action = receivePuzzle({
                 ...currentPuzzle,
                 title: message.puzzleName,
                 index: message.puzzleIndex,
                 bannedChars: message.puzzleOptions.bannedCharacters,
                 timeLimit: message.puzzleOptions.timeLimit,
             });
+
+            store.dispatch(action);
             break;
         }
 
         case MESSAGE_NAME.puzzle: {
             const currentPuzzle = puzzle(state);
 
-            newAction = receivePuzzle({
+            const action = receivePuzzle({
                 ...currentPuzzle,
                 markup : message.input,
                 bannedChars: message.puzzleOptions.bannedCharacters,
                 timeLimit: message.puzzleOptions.timeLimit,
                 expectedSelection: JSON.parse(message.expected),
             });
+
+            store.dispatch(action);
             break;
         }
 
@@ -72,10 +92,6 @@ export const phoenixReceiverMiddleware = store => next => action => {
             spreadSessionState(store, message);
             break;
         }
-    }
-
-    if (newAction) {
-        store.dispatch(newAction);
     }
 
     return next(action);

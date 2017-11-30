@@ -36,6 +36,7 @@ const PureRound = ({
             value={selector}
             disabled={!roundStarted || roundFinished || isCorrect}
             onInput={setSelector}
+            key="SelectorInput"
         />
 
         <BannedCharactersContainer
@@ -43,7 +44,11 @@ const PureRound = ({
             highlightedCharacters={ roundStarted ? highlightedBannedChars : null }
         />
 
-        <CountdownContainer key="Countdown" />
+        <CountdownContainer
+            key="Countdown"
+            remainingTimeArcColor={isCorrect ? '#87c736' : '#f8d940'}
+            textFillColor={isCorrect ? '#87c736' : '#f8d940'}
+        />
 
         <MarkupRendererContainer
             key="MarkupRenderer"
