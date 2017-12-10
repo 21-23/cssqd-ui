@@ -37,12 +37,19 @@ export const phoenixSolutionMiddleware = store => next => action => {
     const { message } = parseMessage(action.payload.data);
 
     if (message.name === MESSAGE_NAME.solutionEvaluated) {
+        const isCorrect = message.correct === CORRECT_SOLUTION_KEY;
+
         const selectionAction = setSelection({
+            isCorrect,
             selection: JSON.parse(message.result) || [],
-            isCorrect: message.correct === CORRECT_SOLUTION_KEY,
         });
 
         store.dispatch(selectionAction);
+
+        if (isCorrect) {
+            const timeRemainingAction = setTimeRemaining(Math.round(message.time), true);
+            store.dispatch(timeRemainingAction);
+        }
     }
 
     if (message.name === MESSAGE_NAME.roundPhaseChanged && message.roundPhase === RoundPhase.COUNTDOWN) {
@@ -60,7 +67,7 @@ export const phoenixSolutionMiddleware = store => next => action => {
             setSelection({ isCorrect }),
             setSelector(message.solution.code),
             isCorrect && setTimeRemaining(
-                Math.ceil(message.puzzle.options.timeLimit - message.solution.time),
+                Math.round(message.solution.time),
                 true
             ),
         ]
