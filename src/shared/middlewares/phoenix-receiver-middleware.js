@@ -6,6 +6,7 @@ import { receivePuzzle, receivePuzzlesCount } from '../actions/puzzle-actions';
 import { receiveUser } from '../actions/user-actions';
 import { puzzle } from '../selectors/puzzle-selectors';
 import * as RoundPhase from '../constants/round-phase';
+import { init } from '../actions/init-actions';
 
 const { MESSAGE_NAME } = protocol.ui;
 
@@ -99,6 +100,7 @@ export const phoenixReceiverMiddleware = store => next => action => {
 
 function spreadSessionState(store, message) {
     const actions = [
+        init(),
         receiveUser(message.displayName),
         message.roundCountdown && setTimeRemaining(message.roundCountdown),
         message.startCountdown && setTimeRemaining(message.startCountdown),
