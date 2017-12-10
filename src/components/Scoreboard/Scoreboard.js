@@ -7,11 +7,24 @@ import { UsersCounter } from '../UsersCounter/UsersCounter';
 import { Table } from './Table';
 import { ColumnsMap } from './columns';
 
-
 const CORRECT_SOLUTION = 'correct';
 
 const isCorrectSolution = s => s.correct === CORRECT_SOLUTION;
 const getSolvedCount = items => items.filter(isCorrectSolution).length;
+
+const scoreTypeColumnsMap = {
+    round: [
+        ColumnsMap.NAME,
+        ColumnsMap.ROUND_TIME,
+        ColumnsMap.SELECTOR
+    ],
+
+    aggregate: [
+        ColumnsMap.RANK,
+        ColumnsMap.NAME,
+        ColumnsMap.AGGREGATE_TIME,
+    ]
+}
 
 const Scoreboard = ({ visibleScore, roundScore, aggregateScore, toggleVisibleScoreType }) => (
     <div className="scoreboard-wrapper">
@@ -30,63 +43,20 @@ const Scoreboard = ({ visibleScore, roundScore, aggregateScore, toggleVisibleSco
                 />
             </div>
         </div>
-        <div className={`scores -${visibleScore}`}>
-            <div className="table-container round-score-wrap">
-                <Table
-                    columns={[
-                        ColumnsMap.NAME,
-                        ColumnsMap.ROUND_TIME,
-                        ColumnsMap.SELECTOR
-                    ]}
-                    items={roundScore}
-                    isActiveRow={item => item.correct === CORRECT_SOLUTION}
-                />
-            </div>
-            <div className="table-container aggregate-score-wrap">
-                <Table
-                    columns={[
-                        ColumnsMap.RANK,
-                        ColumnsMap.NAME,
-                        ColumnsMap.AGGREGATE_TIME,
-                    ]}
-                    items={aggregateScore}
-                />
-            </div>
+        <div className={`score-table-wrapper -${visibleScore}`}>
+            <Table
+                columns={scoreTypeColumnsMap[visibleScore]}
+                items={visibleScore === 'round' ? roundScore : aggregateScore}
+                isActiveRow={visibleScore === 'round' ?
+                    item => item.correct === CORRECT_SOLUTION :
+                    undefined
+                }
+            />
         </div>
         <button className="score-view-switcher" onClick={() => toggleVisibleScoreType()}>
             <Icon name={visibleScore === 'aggregate' ? 'angle-right' : 'angle-left'} />
         </button>
         <style jsx>{`
-            .scores {
-                overflow: auto;
-                position: relative;
-                flex: 1;
-            }
-
-            .table-container {
-                transition: transform 300ms linear;
-                width: 100%;
-                height: 100%;
-            }
-
-            .round-score-wrap {
-                transform: translateX(0);
-            }
-
-            .aggregate-score-wrap {
-                top: 0;
-                position: absolute;
-                transform: translateX(100%);
-            }
-
-            .-aggregate .round-score-wrap {
-                transform: translateX(-100%);
-            }
-
-            .-aggregate .aggregate-score-wrap {
-                transform: translateX(0);
-            }
-
             .score-view-switcher {
                 color: ${winningGreen};
                 border: 2px solid ${superLightGreen};
@@ -107,16 +77,10 @@ const Scoreboard = ({ visibleScore, roundScore, aggregateScore, toggleVisibleSco
                 background: rgba(110,207,255,.26);
             }
 
-            .scoreboard-wrapper {
-                max-height: 100%;
-                display: flex;
-                flex-direction: column;
-            }
-
             .heading {
                 color: white;
                 display: flex;
-                flex: 1 0 auto;
+                flex: 0 0 auto;
             }
 
             .counter-wrapper {
@@ -133,10 +97,37 @@ const Scoreboard = ({ visibleScore, roundScore, aggregateScore, toggleVisibleSco
                 color: #87C736;
             }
 
-            .table-container {
+            .scoreboard-wrapper {
                 height: 100%;
-                max-height: 100%;
-                overflow: auto;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .score-table-wrapper {
+                flex: 1;
+                overflow: hidden;
+            }
+        `}</style>
+
+        <style jsx global>{`
+            .cell.displayName {
+                width: 45%;
+            }
+
+            .-aggregate .cell.displayName {
+                width: 70%;
+            }
+
+            .cell.time, .cell.aggregateScore {
+                width: 20%;
+            }
+
+            .cell.code {
+                width: 35%;
+            }
+
+            .cell.rank {
+                width: 10%;
             }
         `}</style>
     </div>

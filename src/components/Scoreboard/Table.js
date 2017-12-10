@@ -1,39 +1,96 @@
 import _ from 'lodash';
 import { h } from 'preact';
+import VirtualList from 'preact-virtual-list';
 
-import { TableRow } from './TableRow';
-import { HeadingCell } from './HeadingCell';
+const ROW_HEIHGT = 35;
 
-export const Table = ({ columns, items, isActiveRow = _.constant(false) }) => {
-    const titles = columns.map(HeadingCell);
-    const rows = items.map((item, rowIndex) => (
-        <TableRow
-            columns={columns}
-            item={item}
-            rowIndex={rowIndex}
-            isActive={isActiveRow(item)}
-        />
-    ));
+const renderCells = (columns, item, rowIndex) => columns.map((column) => {
+    const format = column.format || _.identity;
+    const value = column.isIndex ? (rowIndex + 1) : format(item[column.key]);
+
+    return <div className={`cell ${column.key}`}>{ value }</div>
+});
+
+
+function renderRow(columns, item, rowIndex, isActiveRow) {
+    const cells = renderCells(columns, item, rowIndex);
 
     return (
-        <table>
-            <thead>
-                <tr >
-                    { titles }
-                </tr>
-            </thead>
+        <div className={`row ${isActiveRow(item) ? '-active' : ''}`}>
+            { cells }
+        </div>
+    );
+}
 
-            <tbody>
-                { rows }
-            </tbody>
+export const Table = ({ columns, items, isActiveRow = _.constant(false) }) => {
+    return (
+        <div className="table-wrapper">
+            <div className="row -heading">
+                { columns.map(column => <div className={`cell ${column.key}`}>{ column.title}</div>)}
+            </div>
 
-            <style jsx>{`
-                table {
+            <VirtualList
+                data={items}
+                class="table"
+                renderRow={(item) =>
+                    renderRow(columns, item, items.indexOf(item), isActiveRow)
+                }
+                rowHeight={ROW_HEIHGT}
+                overscanCount={10}
+            />
+
+            <style jsx global>{`
+                .table-wrapper {
+                    position: relative;
+                    padding-top: ${ROW_HEIHGT}px;
+                    height: 100%;
+                    overflow: hidden;
+                }
+
+                .table {
+                    height: 100%;
+                    overflow: auto;
+                }
+
+                .row {
+                    height: ${ROW_HEIHGT}px;
+                    white-space: nowrap;
                     width: 100%;
                     color: white;
-                    border-collapse: collapse;
+                }
+
+                .row.-active {
+                    color: #87C736;
+                }
+
+                .row.-heading {
+                    position: absolute;
+                    top: 0;
+                }
+
+                .row.-heading .cell {
+                    border-bottom: 3px solid #3C8A82;
+                }
+
+                .cell {
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    display: inline-block;
+                    box-sizing: border-box;
+                    padding: 5px;
+                    text-align: center;
+                    border-bottom: 1px solid #3C8A82;
+                }
+
+                .cell:first-child {
+                    text-align: left;
+                }
+
+                .cell:last-child {
+                    text-align: right;
                 }
             `}</style>
-        </table>
+        </div>
     );
 }
