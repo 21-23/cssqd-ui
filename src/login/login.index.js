@@ -8,7 +8,7 @@ render(
         <div className="login-panel">
             <div className="buttons-wrapper">
                 <AuthButton path="/auth/github" icon="github" />
-                <AuthButton path="/auth/facebook" icon="facebook" />
+                {/* <AuthButton path="/auth/facebook" icon="facebook" /> */}
                 <AuthButton path="/auth/twitter" icon="twitter" />
                 <AuthButton path="/auth/google" icon="google" />
                 <AuthButton path="/auth/qd-auto" icon="database" />
