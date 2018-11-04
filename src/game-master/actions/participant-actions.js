@@ -14,3 +14,6 @@ export const setParticipantSolution = createAction(SET_PARTICIPANT_SOLUTION);
 
 export const RESET_SOLUTIONS = 'RESET_SOLUTIONS';
 export const resetSolutions = createAction(RESET_SOLUTIONS);
+
+export const SYNC_SOLUTIONS = 'SYNC_SOLUTIONS';
+export const syncSolutions = createAction(SYNC_SOLUTIONS);

@@ -30,6 +30,24 @@ export function participantsReducer(state = initialState, action) {
                 };
             });
 
+        case Actions.SYNC_SOLUTIONS:
+            return state.map(participant => {
+                const participantScoreDiff = action.payload[participant.participantId];
+
+                if (participantScoreDiff) {
+                    return {
+                        ...participant,
+                        inputLength: participantScoreDiff.length,
+                        solution: {
+                            time: participantScoreDiff.time,
+                            correct: participantScoreDiff.correct,
+                        },
+                    };
+                }
+
+                return participant;
+            });
+
         case Actions.RESET_SOLUTIONS:
             return state.map(participant => ({
                 ...participant,
