@@ -16,6 +16,10 @@ const PureRoundLayout = ({ components }) => (
             <div className="round-start-countdown-container">{components.RoundStartCountdown}</div>
         ) : null}
 
+        {components.SocialSharingContainer ? (
+            <div className="social-sharing-container">{components.SocialSharingContainer}</div>
+        ) : null}
+
         <style jsx>
             {`
                 .app-root {

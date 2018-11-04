@@ -28,7 +28,7 @@ process.on('message', message => onArgsReceived(message));
             {
                 message: 'In which app?',
                 type: 'list',
-                choices: [...apps, 'shared'],
+                choices: [...apps.map(app => app.filename), 'shared'],
                 name: 'app',
             },
         ]);
