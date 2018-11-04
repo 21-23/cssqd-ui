@@ -11,8 +11,4 @@ storiesOf('BannedCharacters', module)
             highlightedCharacters={array('highlightedCharacters', ['x'])}
         />
     ))
-    .add('without restrictions', () => (
-        <BannedCharacters
-            bannedCharacters={array('bannedCharacters', [])}
-        />
-    ));
+    .add('without restrictions', () => <BannedCharacters bannedCharacters={array('bannedCharacters', [])} />);

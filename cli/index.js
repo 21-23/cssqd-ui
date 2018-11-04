@@ -31,7 +31,7 @@ const Entity = {
     MIDDLEWARE: 'middlewares',
     REDUCER: 'reducers',
     SELECTORS: 'selectors',
-}
+};
 
 const CommandToEntityTypeMap = {
     [Command.CREATE_ACTIONS.value]: Entity.ACTIONS,
@@ -43,16 +43,19 @@ const CommandToEntityTypeMap = {
 };
 
 (async () => {
-    const { command } = await inquirer.prompt([{
-        message: 'How can I help you?',
-        name: 'command',
-        type: 'list',
-        choices: Commands,
-    }]);
+    const { command } = await inquirer.prompt([
+        {
+            message: 'How can I help you?',
+            name: 'command',
+            type: 'list',
+            choices: Commands,
+        },
+    ]);
 
-    const childToFork = command in CommandToEntityTypeMap ?
-        createEntity(CommandToEntityTypeMap[command]) :
-        fork(path.join(__dirname, `${command}.js`), { stdio: 'inherit' });
+    const childToFork =
+        command in CommandToEntityTypeMap
+            ? createEntity(CommandToEntityTypeMap[command])
+            : fork(path.join(__dirname, `${command}.js`), { stdio: 'inherit' });
 })();
 
 async function createEntity(entity, name, app) {
@@ -64,11 +67,13 @@ async function createEntity(entity, name, app) {
         child.kill();
 
         if (entity === Entity.REDUCER) {
-            const { yes } = await inquirer.prompt([{
-                message: 'Do you want to create actions as well?',
-                name: 'yes',
-                type: 'confirm',
-            }]);
+            const { yes } = await inquirer.prompt([
+                {
+                    message: 'Do you want to create actions as well?',
+                    name: 'yes',
+                    type: 'confirm',
+                },
+            ]);
 
             if (yes) {
                 createEntity(Entity.ACTIONS, name, app);

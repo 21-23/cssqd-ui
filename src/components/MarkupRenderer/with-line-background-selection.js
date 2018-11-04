@@ -17,10 +17,7 @@ function resolveBackgroundColor({ isSelected, shouldBeSelected }, colorPalette) 
 }
 
 export const withLineBackgroundSelection = (BaseComponent, colorPalette) => props => (
-    <div
-        className="line-background-selection"
-        style={{ backgroundColor: resolveBackgroundColor(props, colorPalette) }}
-    >
+    <div className="line-background-selection" style={{ backgroundColor: resolveBackgroundColor(props, colorPalette) }}>
         <BaseComponent {...props} />
     </div>
 );
@@ -30,4 +27,3 @@ export const LineBackgroundSelectionColors = {
     validSelection: 'rgba(169, 218, 70, 0.3)',
     invalidSelection: 'rgba(235, 86, 128, 0.3)',
 };
-

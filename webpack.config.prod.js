@@ -14,34 +14,31 @@ const ownConfig = {
     plugins: [
         new webpack.DefinePlugin({
             'process.env': {
-                'NODE_ENV': JSON.stringify('production'),
-                'LOG_LEVEL': JSON.stringify('+error,-warn,-info,-log,+perf')
-            }
+                NODE_ENV: JSON.stringify('production'),
+                LOG_LEVEL: JSON.stringify('+error,-warn,-info,-log,+perf'),
+            },
         }),
         new webpack.LoaderOptionsPlugin({
             minimize: true,
-            debug: false
+            debug: false,
         }),
         new webpack.optimize.UglifyJsPlugin({
             beautify: false,
             mangle: {
                 screw_ie8: true,
-                keep_fnames: true
+                keep_fnames: true,
             },
             compress: {
-                screw_ie8: true
+                screw_ie8: true,
             },
             comments: false,
             warnings: false,
         }),
-    ]
+    ],
 };
 
 ownConfig.entry = apps.reduce((entries, app) => {
-    entries[app.chunk] = [
-        'babel-polyfill',
-        `./src/${app.chunk}/${app.chunk}.index.js`,
-    ];
+    entries[app.chunk] = ['babel-polyfill', `./src/${app.chunk}/${app.chunk}.index.js`];
     return entries;
 }, {});
 

@@ -25,7 +25,7 @@ export function puzzleReducer(state = initialState, action) {
                     bannedChars: action.payload.bannedChars,
                     expectedSelection: action.payload.expectedSelection,
                     timeLimit: action.payload.timeLimit,
-                }
+                },
             };
 
         case Actions.RECEIVE_PUZZLES_COUNT:
@@ -34,6 +34,7 @@ export function puzzleReducer(state = initialState, action) {
                 puzzlesCount: action.payload,
             };
 
-        default: return state;
+        default:
+            return state;
     }
 }

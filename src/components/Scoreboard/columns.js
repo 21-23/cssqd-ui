@@ -26,6 +26,6 @@ export const ColumnsMap = {
     RANK: {
         key: 'rank',
         title: '#',
-        isIndex: true
-    }
+        isIndex: true,
+    },
 };

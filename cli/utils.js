@@ -7,4 +7,4 @@ exports.toCamelCase = trainCase => {
     const camelCase = `${CamelCase[0].toLowerCase()}${CamelCase.substring(1)}`;
 
     return { camelCase, CamelCase };
-}
+};

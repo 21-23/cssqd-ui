@@ -2,7 +2,7 @@ import { h } from 'preact';
 
 const Layout = ({ children }) => (
     <div class="react-root">
-        { children }
+        {children}
         <style jsx global>{`
             html {
                 font-size: 16px;

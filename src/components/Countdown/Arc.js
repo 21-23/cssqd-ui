@@ -16,12 +16,7 @@ class Arc extends Component {
 
         ctx.beginPath();
 
-        ctx.arc(
-            this.center,
-            this.center,
-            this.radius, -Math.PI / 2,
-            Math.PI * 2 * this.props.progress - Math.PI / 2,
-        );
+        ctx.arc(this.center, this.center, this.radius, -Math.PI / 2, Math.PI * 2 * this.props.progress - Math.PI / 2);
         ctx.stroke();
 
         ctx.closePath();

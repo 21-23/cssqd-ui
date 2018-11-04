@@ -3,30 +3,26 @@ import { withGroupedChildren } from '../../components/with-grouped-children-hoc'
 
 const PureGameMasterLayout = ({ components }) => (
     <div className="game-master">
-        { components.PearlThread }
+        {components.PearlThread}
 
         <div className="game-master-content">
             <div className="content-container">
                 <div className="content-header">
                     <div className="puzzle-attributes">
-                        { components.PuzzleTitle }
-                        <p>{ components.RoundPhaseButton }</p>
-                        <p>{ components.BannedCharacters }</p>
+                        {components.PuzzleTitle}
+                        <p>{components.RoundPhaseButton}</p>
+                        <p>{components.BannedCharacters}</p>
                     </div>
-                    <div className="countdown-container">
-                        { components.Countdown }
-                    </div>
+                    <div className="countdown-container">{components.Countdown}</div>
                 </div>
 
                 <div className="content">
-                    { components.MarkupRenderer }
-                    { components.RoundStartCountdown }
+                    {components.MarkupRenderer}
+                    {components.RoundStartCountdown}
                 </div>
             </div>
 
-            <div className="scoreboard-container">
-                { components.Scoreboard }
-            </div>
+            <div className="scoreboard-container">{components.Scoreboard}</div>
         </div>
 
         <style jsx>{`
@@ -48,7 +44,8 @@ const PureGameMasterLayout = ({ components }) => (
                 padding-bottom: 20px;
             }
 
-            .content-container, .scoreboard-container {
+            .content-container,
+            .scoreboard-container {
                 display: flex;
             }
 

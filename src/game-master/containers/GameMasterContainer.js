@@ -21,10 +21,7 @@ import { ScoreboardContainer } from './ScoreboardContainer';
 const PureGameMasterContainer = ({ setPuzzleIndex }) => (
     <AppContainer>
         <GameMasterLayout>
-            <PearlThreadContainer
-                onPearlClick={setPuzzleIndex}
-                key="PearlThread"
-            />
+            <PearlThreadContainer onPearlClick={setPuzzleIndex} key="PearlThread" />
 
             <PuzzleTitleContainer key="PuzzleTitle" />
             <RoundPhaseButtonContainer key="RoundPhaseButton" />
@@ -37,8 +34,11 @@ const PureGameMasterContainer = ({ setPuzzleIndex }) => (
     </AppContainer>
 );
 
-const GameMasterContainer = connect(null, {
-    setPuzzleIndex,
-})(PureGameMasterContainer);
+const GameMasterContainer = connect(
+    null,
+    {
+        setPuzzleIndex,
+    }
+)(PureGameMasterContainer);
 
 export { GameMasterContainer };

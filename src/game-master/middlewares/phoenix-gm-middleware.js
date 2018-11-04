@@ -9,7 +9,7 @@ import {
     receiveParticipants,
     removeParticipant,
     setParticipantSolution,
-    resetSolutions
+    resetSolutions,
 } from '../actions/participant-actions';
 
 const { MESSAGE_NAME } = protocol.ui;

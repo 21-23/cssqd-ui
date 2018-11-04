@@ -7,11 +7,13 @@ const bootstrap = require('./bootstrap-fs');
 const { toCamelCase } = require('./utils');
 
 (async () => {
-    const { name } = await inquirer.prompt([{
-        message: 'App name? (train-case)',
-        name: 'name',
-        type: 'input',
-    }]);
+    const { name } = await inquirer.prompt([
+        {
+            message: 'App name? (train-case)',
+            name: 'name',
+            type: 'input',
+        },
+    ]);
 
     const { camelCase, CamelCase } = toCamelCase(name);
 
@@ -20,7 +22,6 @@ const { toCamelCase } = require('./utils');
         camelCaseName: camelCase,
         CamelCaseName: CamelCase,
     });
-
 
     bootstrap({
         src: path.join(__dirname, `./app-module-template/**/#{*`),
@@ -39,8 +40,5 @@ const { toCamelCase } = require('./utils');
 
     apps.push(name);
 
-    fs.writeFileSync(
-        path.join(__dirname, '../apps.json'),
-        JSON.stringify(apps, null, 2) + '\n',
-    );
+    fs.writeFileSync(path.join(__dirname, '../apps.json'), JSON.stringify(apps, null, 2) + '\n');
 })();

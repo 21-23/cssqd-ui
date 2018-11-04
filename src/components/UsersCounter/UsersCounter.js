@@ -3,13 +3,11 @@ import Icon from 'react-fontawesome';
 
 const UsersCounter = ({ count, label }) => (
     <div className="users-counter">
-        <div className="count">
-            { count }
-        </div>
+        <div className="count">{count}</div>
 
         <div className="label">
             <Icon name="users" />
-            <span>{ label }</span>
+            <span>{label}</span>
         </div>
         <style jsx>{`
             .users-counter {
@@ -29,7 +27,6 @@ const UsersCounter = ({ count, label }) => (
                 font-size: 0.6em;
                 align-items: flex-start;
             }
-
         `}</style>
     </div>
 );

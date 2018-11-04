@@ -1,8 +1,6 @@
 import { voidElements } from './void-elements';
 
-export const indentString = (level, size) => new Array(level)
-    .fill(' '.repeat(size))
-    .join('');
+export const indentString = (level, size) => new Array(level).fill(' '.repeat(size)).join('');
 
 export function serialize(node, indentLevel, closing = false) {
     const tagName = node.tagName.toLowerCase();

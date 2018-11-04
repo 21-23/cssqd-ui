@@ -25,7 +25,7 @@ const BannedCharacters = ({ bannedCharacters = [], highlightedCharacters = [] })
     return (
         <div class="banned-characters">
             <span class="label">Banned chars: </span>
-            { content }
+            {content}
 
             <style jsx>{`
                 .banned-characters {
@@ -49,37 +49,37 @@ const BannedCharacters = ({ bannedCharacters = [], highlightedCharacters = [] })
 
 const BannedCharacter = (char, isHighlighted) => {
     const bannedCharacterClasses = classNames('banned-character', {
-        'highlighted': isHighlighted,
+        highlighted: isHighlighted,
     });
 
     return (
         <div className={bannedCharacterClasses}>
-            { char }
+            {char}
 
             <style jsx>{`
-            .banned-character {
-                box-sizing: border-box;
-                font-family: monospace;
-                font-weight: 600;
-                font-size: ${DisplayConstants.FONT_SIZE}px;
-                color: ${Colors.CHARACTER};
-                margin: 0 5px;
-                background-color: ${Colors.CHARACTER_BACKGROUND};
-                min-width: 25px;
-                min-height: 25px;
-                border-radius: 4px;
-                text-align: center;
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                transition: background 0.1s, transform 150ms;
-            }
+                .banned-character {
+                    box-sizing: border-box;
+                    font-family: monospace;
+                    font-weight: 600;
+                    font-size: ${DisplayConstants.FONT_SIZE}px;
+                    color: ${Colors.CHARACTER};
+                    margin: 0 5px;
+                    background-color: ${Colors.CHARACTER_BACKGROUND};
+                    min-width: 25px;
+                    min-height: 25px;
+                    border-radius: 4px;
+                    text-align: center;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    transition: background 0.1s, transform 150ms;
+                }
 
-            .highlighted {
-                background-color: ${Colors.HIGHLIGHTED_CHARACTER_BACKGROUND};
-                border: 2px solid ${Colors.HIGHLIGHTED_CHARACTER_BORDER};
-                transform: scale(${DisplayConstants.HIGHLIGHTED_CHAR_SCALE_COEFFICIENT});
-            }
+                .highlighted {
+                    background-color: ${Colors.HIGHLIGHTED_CHARACTER_BACKGROUND};
+                    border: 2px solid ${Colors.HIGHLIGHTED_CHARACTER_BORDER};
+                    transform: scale(${DisplayConstants.HIGHLIGHTED_CHAR_SCALE_COEFFICIENT});
+                }
             `}</style>
         </div>
     );

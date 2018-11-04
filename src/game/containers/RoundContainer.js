@@ -19,7 +19,6 @@ import { highlightedBannedChars } from '../selectors/round-selectors';
 
 import { setSelector } from '../actions/solution-actions';
 
-
 const PureRound = ({
     roundStarted,
     roundFinished,
@@ -41,7 +40,7 @@ const PureRound = ({
 
         <BannedCharactersContainer
             key="BannedCharacters"
-            highlightedCharacters={ roundStarted ? highlightedBannedChars : null }
+            highlightedCharacters={roundStarted ? highlightedBannedChars : null}
         />
 
         <CountdownContainer
@@ -50,24 +49,24 @@ const PureRound = ({
             textFillColor={isCorrect ? '#87c736' : '#f8d940'}
         />
 
-        <MarkupRendererContainer
-            key="MarkupRenderer"
-            actualSelection={selection}
-        />
+        <MarkupRendererContainer key="MarkupRenderer" actualSelection={selection} />
 
         <RoundStartCountdownContainer key="RoundStartCountdown" />
     </RoundLayout>
 );
 
-const RoundContainer = connect(createStructuredSelector({
-    roundStarted,
-    roundFinished,
-    selection,
-    selector,
-    highlightedBannedChars,
-    isCorrect,
-}), {
-    setSelector,
-})(PureRound);
+const RoundContainer = connect(
+    createStructuredSelector({
+        roundStarted,
+        roundFinished,
+        selection,
+        selector,
+        highlightedBannedChars,
+        isCorrect,
+    }),
+    {
+        setSelector,
+    }
+)(PureRound);
 
 export { RoundContainer };

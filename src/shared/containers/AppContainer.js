@@ -6,11 +6,10 @@ import { Header } from './HeaderContainer';
 import { Layout } from '../../components/Layout';
 import { initialized } from '../selectors/init-selectors';
 
-
 const PureAppContainer = ({ children, initialized }) => (
     <Layout>
         <Header />
-        { initialized ? children : null }
+        {initialized ? children : null}
     </Layout>
 );
 

@@ -8,4 +8,3 @@ export const startRound = createAction(START_ROUND);
 
 export const FINISH_ROUND = 'FINISH_ROUND';
 export const finishRound = createAction(FINISH_ROUND);
-

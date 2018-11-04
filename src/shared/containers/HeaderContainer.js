@@ -7,11 +7,7 @@ const backgroundImageUrl = require('../../assets/images/header-bg.png');
 const Header = connect(state => ({
     username: state.username,
 }))(({ username }) => (
-    <PureHeader
-        productName="CSS Quickdraw"
-        username={username}
-        backgroundImageUrl={backgroundImageUrl}
-    />
+    <PureHeader productName="CSS Quickdraw" username={username} backgroundImageUrl={backgroundImageUrl} />
 ));
 
 export { Header };

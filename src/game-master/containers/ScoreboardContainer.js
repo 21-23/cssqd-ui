@@ -6,12 +6,15 @@ import { toggleVisibleScoreType } from '../actions/score-actions';
 import { visibleScore, aggregateScore, roundScore } from '../selectors/score-selectors';
 import { ScoreType } from '../constants/score-types';
 
-const ScoreboardContainer = connect(createStructuredSelector({
-    visibleScore,
-    aggregateScore,
-    roundScore,
-}), {
-    toggleVisibleScoreType,
-})(Scoreboard);
+const ScoreboardContainer = connect(
+    createStructuredSelector({
+        visibleScore,
+        aggregateScore,
+        roundScore,
+    }),
+    {
+        toggleVisibleScoreType,
+    }
+)(Scoreboard);
 
-export { ScoreboardContainer }
+export { ScoreboardContainer };

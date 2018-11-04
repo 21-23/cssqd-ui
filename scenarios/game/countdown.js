@@ -3,7 +3,6 @@ import { pause } from '../helpers';
 import { store } from '../../src/game/game-store';
 import * as CountdownActions from '../../src/shared/actions/countdown-actions';
 
-
 export async function countdown(duration) {
     let timeRemaining = duration;
 
@@ -18,4 +17,4 @@ export async function countdown(duration) {
         store.dispatch(CountdownActions.setTimeRemaining(timeRemaining));
         timeRemaining--;
     }
-};
+}

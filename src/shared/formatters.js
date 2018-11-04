@@ -1,4 +1,4 @@
-export const formatScoreTime = (timeInSeconds) => {
+export const formatScoreTime = timeInSeconds => {
     if (!timeInSeconds) {
         return '';
     }

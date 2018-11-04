@@ -19,7 +19,7 @@ const voidElements = [
     'script',
     'style',
     'textarea',
-    'title'
-]
+    'title',
+];
 
 export { voidElements };

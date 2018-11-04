@@ -12,18 +12,21 @@ const config = {
         },
     },
     module: {
-        rules: [{
-            test: /\.js$/,
-            loader: 'babel-loader',
-            include: [
-                path.resolve(__dirname, 'src'),
-                path.resolve(__dirname, 'node_modules', 'message-factory'),
-                path.resolve(__dirname, 'node_modules', 'phoenix'),
-            ],
-        }, {
-            test: /(\.(png|jpg)$)/,
-            loader: 'url-loader',
-        }]
+        rules: [
+            {
+                test: /\.js$/,
+                loader: 'babel-loader',
+                include: [
+                    path.resolve(__dirname, 'src'),
+                    path.resolve(__dirname, 'node_modules', 'message-factory'),
+                    path.resolve(__dirname, 'node_modules', 'phoenix'),
+                ],
+            },
+            {
+                test: /(\.(png|jpg)$)/,
+                loader: 'url-loader',
+            },
+        ],
     },
     plugins: [
         new FaviconsWebpackPlugin({
@@ -42,16 +45,19 @@ const config = {
                 opengraph: false,
                 twitter: false,
                 yandex: false,
-                windows: false
-            }
+                windows: false,
+            },
         }),
 
-        ...apps.map(app => new HTMLWebpackPlugin({
-            chunks: [app.chunk],
-            title: `${app.title}`,
-            filename: `${app.filename}.html`,
-            template: './src/index.tpl.html',
-        })),
+        ...apps.map(
+            app =>
+                new HTMLWebpackPlugin({
+                    chunks: [app.chunk],
+                    title: `${app.title}`,
+                    filename: `${app.filename}.html`,
+                    template: './src/index.tpl.html',
+                })
+        ),
     ],
 };
 

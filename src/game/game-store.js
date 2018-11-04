@@ -6,13 +6,7 @@ import { phoenixReceiverMiddleware } from '../shared/middlewares/phoenix-receive
 import { gameReducer } from './reducers/game-reducer.js';
 import { sharedMiddlewares } from '../shared/middlewares/index';
 
-const store = createStore(
-    gameReducer,
-    applyMiddleware(
-        phoenixSolutionMiddleware,
-        ...sharedMiddlewares,
-    ),
-);
+const store = createStore(gameReducer, applyMiddleware(phoenixSolutionMiddleware, ...sharedMiddlewares));
 
 if (process.env.NODE_ENV !== 'production') {
     window.store = store;

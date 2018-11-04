@@ -14,6 +14,7 @@ export function roundPhaseReducer(state = initialState, action) {
         case Actions.FINISH_ROUND:
             return RoundPhase.FINISHED;
 
-        default: return state;
+        default:
+            return state;
     }
 }

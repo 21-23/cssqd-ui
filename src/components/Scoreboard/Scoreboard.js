@@ -2,7 +2,7 @@ import _ from 'lodash';
 import { h, Component } from 'preact';
 import Icon from 'react-fontawesome';
 
-import { winningGreen, superLightGreen } from '../../styles/color-palette'
+import { winningGreen, superLightGreen } from '../../styles/color-palette';
 import { UsersCounter } from '../UsersCounter/UsersCounter';
 import { Table } from './Table';
 import { ColumnsMap } from './columns';
@@ -13,44 +13,27 @@ const isCorrectSolution = s => s.correct === CORRECT_SOLUTION;
 const getSolvedCount = items => items.filter(isCorrectSolution).length;
 
 const scoreTypeColumnsMap = {
-    round: [
-        ColumnsMap.NAME,
-        ColumnsMap.ROUND_TIME,
-        ColumnsMap.SELECTOR
-    ],
+    round: [ColumnsMap.NAME, ColumnsMap.ROUND_TIME, ColumnsMap.SELECTOR],
 
-    aggregate: [
-        ColumnsMap.RANK,
-        ColumnsMap.NAME,
-        ColumnsMap.AGGREGATE_TIME,
-    ]
-}
+    aggregate: [ColumnsMap.RANK, ColumnsMap.NAME, ColumnsMap.AGGREGATE_TIME],
+};
 
 const Scoreboard = ({ visibleScore, roundScore, aggregateScore, toggleVisibleScoreType }) => (
     <div className="scoreboard-wrapper">
         <div className="heading">
             <div className="counter-wrapper -joined">
-                <UsersCounter
-                    count={roundScore.length}
-                    label="Joined"
-                />
+                <UsersCounter count={roundScore.length} label="Joined" />
             </div>
 
             <div className="counter-wrapper -solved">
-                <UsersCounter
-                    count={getSolvedCount(roundScore)}
-                    label="Solved"
-                />
+                <UsersCounter count={getSolvedCount(roundScore)} label="Solved" />
             </div>
         </div>
         <div className={`score-table-wrapper -${visibleScore}`}>
             <Table
                 columns={scoreTypeColumnsMap[visibleScore]}
                 items={visibleScore === 'round' ? roundScore : aggregateScore}
-                isActiveRow={visibleScore === 'round' ?
-                    item => item.correct === CORRECT_SOLUTION :
-                    undefined
-                }
+                isActiveRow={visibleScore === 'round' ? item => item.correct === CORRECT_SOLUTION : undefined}
             />
         </div>
         <button className="score-view-switcher" onClick={() => toggleVisibleScoreType()}>
@@ -74,7 +57,7 @@ const Scoreboard = ({ visibleScore, roundScore, aggregateScore, toggleVisibleSco
 
             .score-view-switcher:hover {
                 cursor: pointer;
-                background: rgba(110,207,255,.26);
+                background: rgba(110, 207, 255, 0.26);
             }
 
             .heading {
@@ -90,11 +73,11 @@ const Scoreboard = ({ visibleScore, roundScore, aggregateScore, toggleVisibleSco
             }
 
             .counter-wrapper:first-child {
-                border-right: 1px solid #3C8A82;
+                border-right: 1px solid #3c8a82;
             }
 
             .counter-wrapper.-solved {
-                color: #87C736;
+                color: #87c736;
             }
 
             .scoreboard-wrapper {
@@ -118,7 +101,8 @@ const Scoreboard = ({ visibleScore, roundScore, aggregateScore, toggleVisibleSco
                 width: 70%;
             }
 
-            .cell.time, .cell.aggregateScore {
+            .cell.time,
+            .cell.aggregateScore {
                 width: 20%;
             }
 

@@ -31,7 +31,6 @@ export const phoenixReceiverMiddleware = store => next => action => {
             const action = creator && creator();
             action && store.dispatch(action);
 
-
             if (message.roundPhase === RoundPhase.COUNTDOWN) {
                 const action = setTimeRemaining(3);
                 store.dispatch(action);
@@ -78,7 +77,7 @@ export const phoenixReceiverMiddleware = store => next => action => {
 
             const action = receivePuzzle({
                 ...currentPuzzle,
-                markup : message.input,
+                markup: message.input,
                 bannedChars: message.puzzleOptions.bannedCharacters,
                 timeLimit: message.puzzleOptions.timeLimit,
                 expectedSelection: JSON.parse(message.expected),
@@ -96,7 +95,7 @@ export const phoenixReceiverMiddleware = store => next => action => {
     }
 
     return next(action);
-}
+};
 
 function spreadSessionState(store, message) {
     const actions = [
@@ -105,17 +104,17 @@ function spreadSessionState(store, message) {
         message.roundCountdown && setTimeRemaining(message.roundCountdown),
         message.startCountdown && setTimeRemaining(message.startCountdown),
         roundPhaseToActionMap[message.roundPhase] && roundPhaseToActionMap[message.roundPhase](),
-        message.puzzle && receivePuzzle({
-            markup : message.puzzle.input,
-            bannedChars: message.puzzle.options.bannedCharacters,
-            timeLimit: message.puzzle.options.timeLimit,
-            expectedSelection: JSON.parse(message.puzzle.expected),
-            title: message.puzzle.name,
-            index: message.puzzleIndex,
-        }),
+        message.puzzle &&
+            receivePuzzle({
+                markup: message.puzzle.input,
+                bannedChars: message.puzzle.options.bannedCharacters,
+                timeLimit: message.puzzle.options.timeLimit,
+                expectedSelection: JSON.parse(message.puzzle.expected),
+                title: message.puzzle.name,
+                index: message.puzzleIndex,
+            }),
         receivePuzzlesCount(message.puzzleCount),
-    ]
-    .filter(Boolean);
+    ].filter(Boolean);
 
     actions.forEach(store.dispatch);
 }

@@ -13,22 +13,25 @@ const args = new Promise(resolve => {
     onArgsReceived = resolve;
 });
 
-process.on('message', (message) => onArgsReceived(message));
+process.on('message', message => onArgsReceived(message));
 
 (async () => {
     let { entity, name, app } = await args;
 
     if (!name || !app) {
-        const answer = await inquirer.prompt([{
-            message: `${toCamelCase(entity).CamelCase} name? (train-case)`,
-            name: 'name',
-            type: 'input',
-        }, {
-            message: 'In which app?',
-            type: 'list',
-            choices: [...apps, 'shared'],
-            name: 'app'
-        }]);
+        const answer = await inquirer.prompt([
+            {
+                message: `${toCamelCase(entity).CamelCase} name? (train-case)`,
+                name: 'name',
+                type: 'input',
+            },
+            {
+                message: 'In which app?',
+                type: 'list',
+                choices: [...apps, 'shared'],
+                name: 'app',
+            },
+        ]);
 
         name = answer.name;
         app = answer.app;
@@ -47,6 +50,6 @@ process.on('message', (message) => onArgsReceived(message));
         filenamePrefix: '__#',
         done() {
             process.send({ name, app });
-        }
+        },
     });
 })();

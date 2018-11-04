@@ -12,7 +12,7 @@ window.gameScenario = async () => {
     setPuzzle({
         title: 'Signing Up',
         index: 1,
-        markup :`
+        markup: `
         <main data-qdid="1">
             <input data-qdid="2" type="text"></input>
             <input data-qdid="3" type="number"></input>
@@ -27,7 +27,6 @@ window.gameScenario = async () => {
 
     store.dispatch(RoundPhaseActions.startCountdown());
     await countdown(3);
-
 
     store.dispatch(RoundPhaseActions.startRound());
     await Promise.all([

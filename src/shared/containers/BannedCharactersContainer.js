@@ -7,15 +7,14 @@ import { BannedCharacters } from '../../components/BannedCharacters/BannedCharac
 import { roundStarted, roundFinished } from '../selectors/round-phase-selectors';
 import { bannedChars } from '../selectors/puzzle-selectors';
 
-const BannedCharactersContainer = connect(createStructuredSelector({
-    roundStarted,
-    roundFinished,
-    bannedChars,
-}))(({ roundStarted, roundFinished, bannedChars, ...rest }) => (
-    <BannedCharacters
-        bannedCharacters={ (roundStarted || roundFinished) ? bannedChars : null }
-        {...rest}
-    />
+const BannedCharactersContainer = connect(
+    createStructuredSelector({
+        roundStarted,
+        roundFinished,
+        bannedChars,
+    })
+)(({ roundStarted, roundFinished, bannedChars, ...rest }) => (
+    <BannedCharacters bannedCharacters={roundStarted || roundFinished ? bannedChars : null} {...rest} />
 ));
 
 export { BannedCharactersContainer };

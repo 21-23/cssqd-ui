@@ -7,6 +7,7 @@ export function countdownReducer(state = initialState, action) {
         case Actions.SET_TIME_REMAINING:
             return action.payload;
 
-        default: return state;
+        default:
+            return state;
     }
 }

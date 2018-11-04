@@ -4,7 +4,7 @@ const CorrectSolution = ({ solution }) => (
     <div>
         <label for="solution-visibility-toggle">Solution</label>
         <input type="checkbox" id="solution-visibility-toggle" />
-        <span className="solution">{ solution }</span>
+        <span className="solution">{solution}</span>
 
         <style jsx>{`
             div {
@@ -32,7 +32,7 @@ const CorrectSolution = ({ solution }) => (
             }
 
             .solution {
-                transition: opacity .25s;
+                transition: opacity 0.25s;
                 color: #f8d940;
                 font-weight: bold;
             }

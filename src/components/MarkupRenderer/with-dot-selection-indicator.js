@@ -37,13 +37,13 @@ const SelectionIndicator = ({ isSelected, shouldBeSelected, colorPalette }) => (
 export const withDotSelectionIndicator = (BaseComponent, colorPalette) => props => (
     <div className="line-container">
         <div className="dot-selection-indicator-container">
-            { props.isSelected || props.shouldBeSelected ?
+            {props.isSelected || props.shouldBeSelected ? (
                 <SelectionIndicator
                     isSelected={props.isSelected}
                     shouldBeSelected={props.shouldBeSelected}
                     colorPalette={colorPalette}
-                /> : null
-            }
+                />
+            ) : null}
         </div>
 
         <BaseComponent {...props} />
@@ -57,7 +57,7 @@ export const withDotSelectionIndicator = (BaseComponent, colorPalette) => props 
                 width: 1.2em;
                 height: 1.2em;
                 margin-right: 5px;
-                padding: .1em;
+                padding: 0.1em;
                 box-sizing: border-box;
             }
         `}</style>

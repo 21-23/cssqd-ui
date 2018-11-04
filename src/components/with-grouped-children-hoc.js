@@ -11,6 +11,6 @@ export function withGroupedChildren(Component) {
             return grouped;
         }, {});
 
-        return <Component {...props} components={components}/>;
-    }
+        return <Component {...props} components={components} />;
+    };
 }

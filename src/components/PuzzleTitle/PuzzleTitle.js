@@ -5,8 +5,8 @@ const margin = '0 0.3em 0 0;';
 
 const PuzzleTitle = ({ index, title }) => (
     <p>
-        <span className="puzzle-index">#{ index + 1 }</span>
-        <span className="puzzle-title">{ title }</span>
+        <span className="puzzle-index">#{index + 1}</span>
+        <span className="puzzle-title">{title}</span>
 
         <style jsx>{`
             p {

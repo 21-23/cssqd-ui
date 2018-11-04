@@ -4,7 +4,6 @@ import { puzzleReducer } from './puzzle-reducer';
 import { userReducer } from './user-reducer';
 import { initReducer } from './init-reducer';
 
-
 export const sharedReducers = {
     roundPhase: roundPhaseReducer,
     countdown: countdownReducer,

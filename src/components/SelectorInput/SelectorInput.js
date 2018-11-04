@@ -4,13 +4,7 @@ import * as Colors from './selector-input-color-palette';
 
 class SelectorInput extends Component {
     render() {
-        const {
-            onInput,
-            disabled,
-            value,
-            maxLength = 128,
-            placeholder = 'Enter your selector here...'
-        } = this.props;
+        const { onInput, disabled, value, maxLength = 128, placeholder = 'Enter your selector here...' } = this.props;
 
         return (
             <input
@@ -39,8 +33,7 @@ class SelectorInput extends Component {
 
                     input:focus {
                         border: 1px solid ${Colors.BORDER_FOCUSED};
-                        box-shadow:
-                            0 0 4px 0px ${Colors.BOX_SHADOW_FOCUSED} inset,
+                        box-shadow: 0 0 4px 0px ${Colors.BOX_SHADOW_FOCUSED} inset,
                             0 0 4px 0px ${Colors.BOX_SHADOW_FOCUSED};
                     }
 
@@ -57,9 +50,9 @@ class SelectorInput extends Component {
         );
     }
 
-    refInput = (node) => {
+    refInput = node => {
         this.input = node;
-    }
+    };
 
     componentDidUpdate(prevProps) {
         if (prevProps.disabled && !this.props.disabled) {

@@ -25,8 +25,8 @@ storiesOf('MarkupRenderer', module)
         <MarkupRenderer
             source={text('source', taskSource)}
             indentSize={number('indentSize', 4)}
-            expectedSelection={array('expectedSelection', ["4"])}
-            actualSelection={array('actualSelection', ["4", "5"])}
+            expectedSelection={array('expectedSelection', ['4'])}
+            actualSelection={array('actualSelection', ['4', '5'])}
             LineComponent={Line}
         />
     ))
@@ -34,8 +34,8 @@ storiesOf('MarkupRenderer', module)
         <MarkupRenderer
             source={text('source', taskSource)}
             indentSize={number('indentSize', 4)}
-            expectedSelection={array('expectedSelection', ["4"])}
-            actualSelection={array('actualSelection', ["4", "5"])}
+            expectedSelection={array('expectedSelection', ['4'])}
+            actualSelection={array('actualSelection', ['4', '5'])}
             LineComponent={withDotSelectionIndicator(Line, DotSelectionIndicatorColors)}
         />
     ))
@@ -43,8 +43,8 @@ storiesOf('MarkupRenderer', module)
         <MarkupRenderer
             source={text('source', taskSource)}
             indentSize={number('indentSize', 4)}
-            expectedSelection={array('expectedSelection', ["4"])}
-            actualSelection={array('actualSelection', ["4", "5"])}
+            expectedSelection={array('expectedSelection', ['4'])}
+            actualSelection={array('actualSelection', ['4', '5'])}
             LineComponent={withLineBackgroundSelection(Line, LineBackgroundSelectionColors)}
         />
     ));

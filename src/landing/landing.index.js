@@ -7,9 +7,7 @@ const logoUrl = require('../assets/images/logo.png');
 render(
     <Layout>
         <div className="landing-logo">
-            <div className="logo-container" style={{ backgroundImage: `url(${logoUrl})` }}>
-
-            </div>
+            <div className="logo-container" style={{ backgroundImage: `url(${logoUrl})` }} />
             <style jsx>{`
                 .landing-logo {
                     position: absolute;
@@ -25,7 +23,7 @@ render(
                 .logo-container {
                     background-color: #fff;
                     background-size: contain;
-                    box-shadow: 0 0 .7em #000;
+                    box-shadow: 0 0 0.7em #000;
                     width: 12vw;
                     height: 12vw;
                 }

@@ -15,7 +15,7 @@ render(
             </div>
             <style jsx>{`
                 .login-panel {
-                    background: rgba(0, 0, 0, .3);
+                    background: rgba(0, 0, 0, 0.3);
                     width: 100%;
                     margin: auto;
                     display: flex;

@@ -38,7 +38,7 @@ export function participantsReducer(state = initialState, action) {
                     time: 0,
                     correct: INCORRECT_SOLUTION_KEY,
                 },
-            }))
+            }));
 
         default:
             return state;

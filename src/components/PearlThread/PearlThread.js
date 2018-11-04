@@ -6,7 +6,7 @@ import { Colors } from './pearl-thread-style-constants';
 
 const FuturePearl = ({ index }) => (
     <span>
-        { index }
+        {index}
         <style jsx>{`
             span {
                 color: rgba(255, 255, 255, 0.5);
@@ -50,7 +50,7 @@ const TitlePearl = ({ isFirst, isLast, title }) => {
 
     return (
         <span className="title" style={style}>
-            { title }
+            {title}
 
             <style jsx>{`
                 .title {
@@ -61,24 +61,22 @@ const TitlePearl = ({ isFirst, isLast, title }) => {
             `}</style>
         </span>
     );
-}
+};
 
 const Pearl = ({ isPast, index, title, isFirst, isLast, onClick = _.noop }) => {
     let content = <FuturePearl index={index + 1} />;
 
     if (isPast) {
-        content = <PastPearl />
+        content = <PastPearl />;
     }
 
     if (title) {
-        content = <TitlePearl isFirst={isFirst} isLast={isLast} title={title} />
+        content = <TitlePearl isFirst={isFirst} isLast={isLast} title={title} />;
     }
 
     return (
         <div className="pearl-container">
-            <span onClick={() => onClick(index)}>
-                { content }
-            </span>
+            <span onClick={() => onClick(index)}>{content}</span>
 
             <style jsx>{`
                 .pearl-container {
@@ -91,7 +89,7 @@ const Pearl = ({ isPast, index, title, isFirst, isLast, onClick = _.noop }) => {
             `}</style>
         </div>
     );
-}
+};
 
 const PearlThread = ({ itemsCount, activeIndex = 0, activeTitle, onPearlClick }) => {
     const progressPercentage = (activeIndex / (itemsCount - 1)) * 100;
@@ -99,9 +97,9 @@ const PearlThread = ({ itemsCount, activeIndex = 0, activeTitle, onPearlClick })
 
     return (
         <div className="pearl-thread">
-            <div className="progress-bar" style={{ width: `${safeProgressPercentage}%` }} ></div>
+            <div className="progress-bar" style={{ width: `${safeProgressPercentage}%` }} />
             <div className="pearls-container">
-                { new Array(itemsCount).fill(0).map((_, index) => (
+                {new Array(itemsCount).fill(0).map((_, index) => (
                     <Pearl
                         isPast={index < activeIndex}
                         title={activeIndex === index ? activeTitle : null}
@@ -110,7 +108,7 @@ const PearlThread = ({ itemsCount, activeIndex = 0, activeTitle, onPearlClick })
                         isLast={index === itemsCount - 1}
                         onClick={onPearlClick}
                     />
-                )) }
+                ))}
             </div>
 
             <style jsx>{`
@@ -139,6 +137,6 @@ const PearlThread = ({ itemsCount, activeIndex = 0, activeTitle, onPearlClick })
             `}</style>
         </div>
     );
-}
+};
 
 export { PearlThread };

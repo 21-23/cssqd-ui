@@ -10,7 +10,7 @@ import { transform, traverse } from './markup-renderer-helpers';
 class MarkupRenderer extends Component {
     state = {
         lines: [],
-    }
+    };
 
     componentDidMount() {
         this.container = document.createElement('div');
@@ -36,7 +36,7 @@ class MarkupRenderer extends Component {
 
         return (
             <pre style={{ color: this.props.colors.primary }}>
-                { lines }
+                {lines}
 
                 <style jsx>{`
                     pre {
@@ -67,7 +67,7 @@ MarkupRenderer.defaultProps = {
     indentSize: 4,
     colors: EditorColors,
     actualSelection: [],
-    LineComponent: withDotSelectionIndicator(Line, DotSelectionIndicatorColors)
+    LineComponent: withDotSelectionIndicator(Line, DotSelectionIndicatorColors),
 };
 
 export { MarkupRenderer };

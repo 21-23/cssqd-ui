@@ -4,37 +4,33 @@ import VirtualList from 'preact-virtual-list';
 
 const ROW_HEIHGT = 35;
 
-const renderCells = (columns, item, rowIndex) => columns.map((column) => {
-    const format = column.format || _.identity;
-    const value = column.isIndex ? (rowIndex + 1) : format(item[column.key]);
+const renderCells = (columns, item, rowIndex) =>
+    columns.map(column => {
+        const format = column.format || _.identity;
+        const value = column.isIndex ? rowIndex + 1 : format(item[column.key]);
 
-    return <div className={`cell ${column.key}`}>{ value }</div>
-});
-
+        return <div className={`cell ${column.key}`}>{value}</div>;
+    });
 
 function renderRow(columns, item, rowIndex, isActiveRow) {
     const cells = renderCells(columns, item, rowIndex);
 
-    return (
-        <div className={`row ${isActiveRow(item) ? '-active' : ''}`}>
-            { cells }
-        </div>
-    );
+    return <div className={`row ${isActiveRow(item) ? '-active' : ''}`}>{cells}</div>;
 }
 
 export const Table = ({ columns, items, isActiveRow = _.constant(false) }) => {
     return (
         <div className="table-wrapper">
             <div className="row -heading">
-                { columns.map(column => <div className={`cell ${column.key}`}>{ column.title}</div>)}
+                {columns.map(column => (
+                    <div className={`cell ${column.key}`}>{column.title}</div>
+                ))}
             </div>
 
             <VirtualList
                 data={items}
                 class="table"
-                renderRow={(item) =>
-                    renderRow(columns, item, items.indexOf(item), isActiveRow)
-                }
+                renderRow={item => renderRow(columns, item, items.indexOf(item), isActiveRow)}
                 rowHeight={ROW_HEIHGT}
                 overscanCount={10}
             />
@@ -60,7 +56,7 @@ export const Table = ({ columns, items, isActiveRow = _.constant(false) }) => {
                 }
 
                 .row.-active {
-                    color: #87C736;
+                    color: #87c736;
                 }
 
                 .row.-heading {
@@ -69,7 +65,7 @@ export const Table = ({ columns, items, isActiveRow = _.constant(false) }) => {
                 }
 
                 .row.-heading .cell {
-                    border-bottom: 3px solid #3C8A82;
+                    border-bottom: 3px solid #3c8a82;
                 }
 
                 .cell {
@@ -80,7 +76,7 @@ export const Table = ({ columns, items, isActiveRow = _.constant(false) }) => {
                     box-sizing: border-box;
                     padding: 5px;
                     text-align: center;
-                    border-bottom: 1px solid #3C8A82;
+                    border-bottom: 1px solid #3c8a82;
                 }
 
                 .cell:first-child {
@@ -93,4 +89,4 @@ export const Table = ({ columns, items, isActiveRow = _.constant(false) }) => {
             `}</style>
         </div>
     );
-}
+};

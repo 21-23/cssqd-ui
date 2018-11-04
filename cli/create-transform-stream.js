@@ -5,16 +5,14 @@ module.exports = ({ vars = {}, filenamePrefix = '#' }) => {
         objectMode: true,
         transform(file, enc, done) {
             for (let varName in vars) {
-                file.basename = file.basename
-                    .replace(new RegExp(`${filenamePrefix}{${varName}}`), vars[varName]);
+                file.basename = file.basename.replace(new RegExp(`${filenamePrefix}{${varName}}`), vars[varName]);
             }
 
             if (file.isBuffer()) {
                 let fileContentsString = file.contents.toString('utf-8');
 
                 for (let varName in vars) {
-                    fileContentsString = fileContentsString
-                        .replace(new RegExp(`#{${varName}}`, 'g'), vars[varName]);
+                    fileContentsString = fileContentsString.replace(new RegExp(`#{${varName}}`, 'g'), vars[varName]);
                 }
 
                 file.contents = new Buffer(fileContentsString);
@@ -22,8 +20,8 @@ module.exports = ({ vars = {}, filenamePrefix = '#' }) => {
 
             this.push(file);
             done();
-        }
+        },
     });
 
     return transformStream;
-}
+};

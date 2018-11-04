@@ -11,14 +11,10 @@ const TIMER_TICK_INTERVAL = 1000;
 class Countdown extends Component {
     render() {
         return (
-            <Canvas ref={canvas => this.canvas = canvas} size={this.props.size}>
+            <Canvas ref={canvas => (this.canvas = canvas)} size={this.props.size}>
+                <Arc color={this.props.arcColor} strokeSize={this.props.strokeSize} progress={1} />
                 <Arc
-                    color={this.props.arcColor}
-                    strokeSize={this.props.strokeSize}
-                    progress={1}
-                />
-                <Arc
-                    ref={arc => this.progressArc = arc}
+                    ref={arc => (this.progressArc = arc)}
                     color={this.props.remainingTimeArcColor}
                     strokeSize={this.props.strokeSize}
                     progress={this.props.timeRemaining / this.props.timeAmount}
@@ -45,7 +41,7 @@ class Countdown extends Component {
         let duration;
 
         if (timeRemainingDiff > 0 && timeRemainingDiff < TIMER_TICK_INTERVAL) {
-            duration = timeRemainingDiff
+            duration = timeRemainingDiff;
         } else {
             duration = TIMER_TICK_INTERVAL;
         }

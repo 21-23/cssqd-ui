@@ -3,15 +3,14 @@ import Icon from 'react-fontawesome';
 
 const Header = ({ productName, username, backgroundImageUrl }) => (
     <header style={{ backgroundImage: `url(${backgroundImageUrl})` }}>
-        <span>{ productName }</span>
+        <span>{productName}</span>
 
-        { username ?
+        {username ? (
             <span>
                 <Icon name="user" />
-                <span className="username">{ username }</span>
+                <span className="username">{username}</span>
             </span>
-            : null
-        }
+        ) : null}
         <style jsx>{`
             header {
                 padding: 10px;

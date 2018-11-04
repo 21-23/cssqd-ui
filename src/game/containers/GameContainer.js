@@ -8,13 +8,13 @@ import { Waitscreen } from '../../components/Waitscreen/Waitscreen';
 import { RoundContainer } from './RoundContainer';
 
 const PureGameContainer = ({ isWaiting }) => (
-    <AppContainer>
-        { isWaiting ? <Waitscreen /> : <RoundContainer /> }
-    </AppContainer>
+    <AppContainer>{isWaiting ? <Waitscreen /> : <RoundContainer />}</AppContainer>
 );
 
-const GameContainer = connect(createStructuredSelector({
-    isWaiting,
-}))(PureGameContainer);
+const GameContainer = connect(
+    createStructuredSelector({
+        isWaiting,
+    })
+)(PureGameContainer);
 
 export { GameContainer };

@@ -8,19 +8,22 @@ const ComponentType = {
 };
 
 (async () => {
-    const { name, componentType } = await inquirer.prompt([{
-        message: 'Component name?',
-        name: 'name',
-        type: 'input',
-    }, {
-        message: 'Component type',
-        name: 'componentType',
-        type: 'list',
-        choices: [
-            { name: 'Function', value: ComponentType.FUNCTION },
-            { name: 'Class', value: ComponentType.CLASS },
-        ]
-    }]);
+    const { name, componentType } = await inquirer.prompt([
+        {
+            message: 'Component name?',
+            name: 'name',
+            type: 'input',
+        },
+        {
+            message: 'Component type',
+            name: 'componentType',
+            type: 'list',
+            choices: [
+                { name: 'Function', value: ComponentType.FUNCTION },
+                { name: 'Class', value: ComponentType.CLASS },
+            ],
+        },
+    ]);
 
     const componentSourceCode = component(name, componentType);
     const storySourceCode = story(name);
@@ -28,11 +31,13 @@ const ComponentType = {
     console.log(`${name}.js\n`);
     console.log(componentSourceCode, '\n');
 
-    const { ok } = await inquirer.prompt([{
-        message: 'Looks ok? (y/n)',
-        name: 'ok',
-        type: 'confirm',
-    }]);
+    const { ok } = await inquirer.prompt([
+        {
+            message: 'Looks ok? (y/n)',
+            name: 'ok',
+            type: 'confirm',
+        },
+    ]);
 
     if (!ok) {
         return console.log('Sorry 😿');
@@ -45,24 +50,24 @@ const ComponentType = {
         console.log('Writing component 📝️');
         fs.writeFileSync(`./src/components/${name}/${name}.js`, componentSourceCode);
 
-        console.log('Writing story ✒️')
+        console.log('Writing story ✒️');
         fs.writeFileSync(`./src/components/${name}/${name}.story.js`, storySourceCode);
 
         console.log('Adding story to storybook 📕');
         fs.writeFileSync(
             './.storybook/stories.js',
             [
-                ...fs.readFileSync('./.storybook/stories.js', 'utf-8')
+                ...fs
+                    .readFileSync('./.storybook/stories.js', 'utf-8')
                     .split('\n')
                     .filter(Boolean),
 
-                `require('../src/components/${name}/${name}.story.js');\n`
+                `require('../src/components/${name}/${name}.story.js');\n`,
             ].join('\n'),
-            'utf-8',
-        )
+            'utf-8'
+        );
 
         console.log('Done! ✅');
-
     } catch (err) {
         console.log('Smth went wrong 😿');
         console.log(err);
@@ -71,8 +76,8 @@ const ComponentType = {
 
 function component(name, componentType) {
     return stripIndent`
-        ${ importNecessaryModules(componentType) }
-        ${ generateComponent(name, componentType) }
+        ${importNecessaryModules(componentType)}
+        ${generateComponent(name, componentType)}
 
         export { ${name} };
     `;
@@ -108,7 +113,8 @@ function generateComponent(name, componentType) {
         case ComponentType.CLASS:
             return generateClassComponent(name);
 
-        default: throw new Error(`Unknown component type "${componentType}"`)
+        default:
+            throw new Error(`Unknown component type "${componentType}"`);
     }
 }
 

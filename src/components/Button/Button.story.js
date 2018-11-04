@@ -6,7 +6,7 @@ import { Button } from './Button';
 storiesOf('Button', module)
     .addDecorator(story => (
         <div>
-            { story() }
+            {story()}
 
             <style jsx>{`
                 div {
@@ -15,15 +15,5 @@ storiesOf('Button', module)
             `}</style>
         </div>
     ))
-    .add('Stop level', () => (
-        <Button
-            iconLeft="stop"
-            text="Stop level"
-        />
-    ))
-    .add('Next level', () => (
-        <Button
-            iconRight="arrow-right"
-            text="Next level"
-        />
-    ));
+    .add('Stop level', () => <Button iconLeft="stop" text="Stop level" />)
+    .add('Next level', () => <Button iconRight="arrow-right" text="Next level" />);

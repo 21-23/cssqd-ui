@@ -24,6 +24,7 @@ export function solutionReducer(state = initialState, action) {
                 isCorrect: action.payload.isCorrect,
             };
 
-        default: return state;
+        default:
+            return state;
     }
 }

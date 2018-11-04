@@ -29,13 +29,13 @@ class Animation {
             progress = 1;
         }
 
-        const v = this.from + (this.valueDiff * progress);
+        const v = this.from + this.valueDiff * progress;
         this.animationFrameCallback(v);
 
         if (progress < 1) {
             this.rafId = requestAnimationFrame(this._nextAnimationFrame);
         }
-    }
+    };
 }
 
 export { Animation };

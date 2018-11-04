@@ -57,24 +57,21 @@ export const phoenixSolutionMiddleware = store => next => action => {
         store.dispatch(clearSelectorAction);
     }
 
-    if (message.name === MESSAGE_NAME.playerSessionState
-        && message.solution
-        && message.roundPhase === RoundPhase.IN_PROGRESS
+    if (
+        message.name === MESSAGE_NAME.playerSessionState &&
+        message.solution &&
+        message.roundPhase === RoundPhase.IN_PROGRESS
     ) {
         const isCorrect = message.solution.correct === CORRECT_SOLUTION_KEY;
 
         const actions = [
             setSelection({ isCorrect }),
             setSelector(message.solution.code),
-            isCorrect && setTimeRemaining(
-                Math.round(message.solution.time),
-                true
-            ),
-        ]
-        .filter(Boolean);
+            isCorrect && setTimeRemaining(Math.round(message.solution.time), true),
+        ].filter(Boolean);
 
         actions.forEach(store.dispatch);
     }
 
     return next(action);
-}
+};

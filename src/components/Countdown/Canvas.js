@@ -30,7 +30,7 @@ class Canvas extends Component {
                     }
 
                     if (c) {
-                        this.children.add(c)
+                        this.children.add(c);
                     } else {
                         this.children.delete(c);
                     }
@@ -41,13 +41,13 @@ class Canvas extends Component {
 
         return (
             <div
-                ref={node => this.container = node}
+                ref={node => (this.container = node)}
                 style={{
                     width: `${this.props.size}px`,
                     height: `${this.props.size}px`,
                 }}
             >
-                { children }
+                {children}
             </div>
         );
     }
