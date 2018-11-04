@@ -2,7 +2,6 @@ import { SEND, MESSAGE } from 'phoenix-middleware';
 import { protocol, parseMessage } from 'message-factory';
 
 import { SET_PUZZLE_INDEX, setPuzzleIndex } from '../actions/gm-puzzle-actions';
-import { START_COUNTDOWN } from '../../shared/actions/round-phase-actions';
 import { TRIGGER_ROUND_START, TRIGGER_ROUND_END } from '../actions/gm-round-phase-actions';
 import {
     joinParticipant,
@@ -10,6 +9,7 @@ import {
     removeParticipant,
     setParticipantSolution,
     resetSolutions,
+    syncSolutions,
 } from '../actions/participant-actions';
 
 const { MESSAGE_NAME } = protocol.ui;
@@ -90,6 +90,12 @@ function handleServerMessage(store, message) {
 
         case MESSAGE_NAME.puzzle: {
             action = resetSolutions();
+            break;
+        }
+
+        case MESSAGE_NAME.solutionSync: {
+            action = syncSolutions(message.solutions);
+            store.dispatch(action);
             break;
         }
     }

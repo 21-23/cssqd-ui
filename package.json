@@ -7,7 +7,7 @@
         "start": "",
         "build": "",
         "watch": "webpack -w --config webpack.config.dev.js",
-        "dev": "webpack-dev-server --hot --inline --content-base=./dist --config webpack.config.dev.js",
+        "dev": "webpack-dev-server --hot --inline --content-base=./dist --config webpack.config.dev.js --public 2123.qd:8080",
         "build:prod": "NODE_ENV=production && npm run clean:prod && webpack --config webpack.config.prod.js --progress",
         "clean": "rm -rf dist",
         "clean:prod": "rm -rf dist-prod",

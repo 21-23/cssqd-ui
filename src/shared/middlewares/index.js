@@ -11,8 +11,10 @@ const phoenixMiddleware = createPhoenixMiddleware({
     timeout: 500,
 });
 
-export const sharedMiddlewares = [
-    phoenixMiddleware,
-    phoenixReceiverMiddleware,
-    // logger,
-];
+const sharedMiddlewares = [phoenixMiddleware, phoenixReceiverMiddleware];
+
+if (process.env.NODE_ENV !== 'production') {
+    sharedMiddlewares.push(logger);
+}
+
+export { sharedMiddlewares };
