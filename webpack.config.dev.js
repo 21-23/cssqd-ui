@@ -13,6 +13,7 @@ const ownConfig = {
 
 ownConfig.entry = apps.reduce((entries, app) => {
     entries[app.chunk] = [
+        'babel-polyfill',
         `./src/${app.chunk}/${app.chunk}.index.js`,
         `./scenarios/${app.chunk}`,
     ];
