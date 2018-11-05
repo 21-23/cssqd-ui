@@ -13,11 +13,11 @@ import { RoundLayout } from '../components/RoundLayout';
 import { SelectorInput } from '../../components/SelectorInput/SelectorInput';
 
 import { roundStarted, roundFinished } from '../../shared/selectors/round-phase-selectors';
-
 import { selector, selection, isCorrect } from '../selectors/solution-selectors';
 import { highlightedBannedChars } from '../selectors/round-selectors';
 
 import { setSelector } from '../actions/solution-actions';
+import { SocialSharingContainer } from './SocialSharingContainer';
 
 const PureRound = ({
     roundStarted,
@@ -27,6 +27,7 @@ const PureRound = ({
     selection,
     highlightedBannedChars,
     isCorrect,
+    isLastRound,
 }) => (
     <RoundLayout>
         <PearlThreadContainer key="PearlThread" />
@@ -40,7 +41,7 @@ const PureRound = ({
 
         <BannedCharactersContainer
             key="BannedCharacters"
-            highlightedCharacters={roundStarted ? highlightedBannedChars : null}
+            highlightedCharacters={roundStarted ? highlightedBannedChars : undefined}
         />
 
         <CountdownContainer
@@ -49,7 +50,11 @@ const PureRound = ({
             textFillColor={isCorrect ? '#87c736' : '#f8d940'}
         />
 
-        <MarkupRendererContainer key="MarkupRenderer" actualSelection={selection} />
+        {isLastRound && roundFinished ? (
+            <SocialSharingContainer key="SocialSharingContainer" />
+        ) : (
+            <MarkupRendererContainer key="MarkupRenderer" actualSelection={selection} />
+        )}
 
         <RoundStartCountdownContainer key="RoundStartCountdown" />
     </RoundLayout>
