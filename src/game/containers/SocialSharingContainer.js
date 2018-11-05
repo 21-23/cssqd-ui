@@ -8,18 +8,18 @@ import { puzzlesCount } from '../../shared/selectors/puzzle-selectors';
 import { AuthButton } from '../../components/AuthButton/AuthButton';
 
 function buildTweetText(totalTime, playerPosition, playersCount, puzzlesCount) {
-    let message = `Today I've spent ${totalTime} seconds to solve ${puzzlesCount} puzzles in #CSSQD by @2123io`;
+    let message = `Today I've spent ${totalTime} seconds to solve ${puzzlesCount} puzzles in #cssqd by 2123.io`;
 
     if (playerPosition <= 10) {
         if (playerPosition > 2) {
-            return message + `\nThere were only ${playerPosition - 1} people faster than me out of ${playersCount}!`;
+            return message + `\nThere were only ${playerPosition - 1} people faster than me – out of ${playersCount}!`;
         }
 
         if (playerPosition > 1) {
-            return message + `\nThere was only single person faster than me out of ${playersCount}!`;
+            return message + `\nThere was only single person faster than me – out of ${playersCount}!`;
         }
 
-        return message + `\nI'm the fastest out of ${playersCount} people!`;
+        return message + `\nI'm the fastest of ${playersCount} people!`;
     }
 
     return message;
