@@ -1,0 +1,26 @@
+[
+    {
+        "markup": "<span data-qdid=\"1\"></span><div data-qdid=\"2\"></div><a data-qdid=\"3\"></a>",
+        "bannedChars": [],
+        "timeLimit": 120,
+        "expectedSelection": ["2"],
+        "title": "Straightforward",
+        "index": 0
+    },
+    {
+        "markup": "<span data-qdid=\"1\"></span><div data-qdid=\"2\" class=\"foo\"></div><a data-qdid=\"3\"></a>",
+        "bannedChars": ["d"],
+        "timeLimit": 120,
+        "expectedSelection": ["2"],
+        "title": "Simple",
+        "index": 1
+    },
+    {
+        "markup": "<span data-qdid=\"1\"></span><div data-qdid=\"2\" class=\"foo\"></div><a data-qdid=\"3\"></a>",
+        "bannedChars": ["d", "."],
+        "timeLimit": 120,
+        "expectedSelection": ["2"],
+        "title": "Harder",
+        "index": 2
+    }
+]
