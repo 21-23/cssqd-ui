@@ -6,6 +6,7 @@ import { hasScore, totalTime, playerPosition, playersCount } from '../selectors/
 
 import { puzzlesCount } from '../../shared/selectors/puzzle-selectors';
 import { AuthButton } from '../../components/AuthButton/AuthButton';
+import { ModalContainer } from '../../components/ModalContainer';
 
 function buildTweetText(totalTime, playerPosition, playersCount, puzzlesCount) {
     let message = `Today I've spent ${totalTime} seconds to solve ${puzzlesCount} puzzles in #cssqd by 2123.io`;
@@ -27,7 +28,7 @@ function buildTweetText(totalTime, playerPosition, playersCount, puzzlesCount) {
 
 const PureSocialSharingContainer = ({ hasScore, totalTime, playerPosition, playersCount, puzzlesCount }) =>
     hasScore ? (
-        <div className="modal-container">
+        <ModalContainer>
             <div className="modal-content">
                 <div className="modal-title">Congratulations!</div>
                 <div className="modal-text">
@@ -54,38 +55,6 @@ const PureSocialSharingContainer = ({ hasScore, totalTime, playerPosition, playe
                 </div>
             </div>
             <style jsx>{`
-                .modal-container {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    right: 0;
-                    bottom: 0;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    background-color: rgba(0, 0, 0, 0.3);
-                }
-
-                .modal-title {
-                    text-align: center;
-                    color: #f8d940;
-                    text-transform: uppercase;
-                }
-
-                .modal-text {
-                    margin: 2rem 0;
-                }
-
-                .modal-content {
-                    padding: 3rem;
-                    background: linear-gradient(to top, #183d3d 0%, #224b4b 35%, #2d5d59 70%, #43827f 100%) repeat-x
-                        #183d3d;
-                    color: white;
-                    border-radius: 10px;
-                    max-width: 400px;
-                    border: 1px solid #48847e;
-                }
-
                 p {
                     margin: 0.3rem 0;
                     text-align: center;
@@ -96,12 +65,8 @@ const PureSocialSharingContainer = ({ hasScore, totalTime, playerPosition, playe
                     margin-left: 1vh;
                     vertical-align: middle;
                 }
-
-                .modal-footer {
-                    text-align: center;
-                }
             `}</style>
-        </div>
+        </ModalContainer>
     ) : null;
 
 const SocialSharingContainer = connect(

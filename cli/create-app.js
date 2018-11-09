@@ -23,6 +23,11 @@ const { toCamelCase } = require('./utils');
         CamelCaseName: CamelCase,
     });
 
+    if (apps.findIndex(page => page.filename === name) !== -1) {
+        console.log(`Sorry, app ${name} already exists`);
+        return;
+    }
+
     bootstrap({
         src: path.join(__dirname, `./app-module-template/**/#{*`),
         dest: path.join(__dirname, `../src/${name}`),
@@ -33,12 +38,11 @@ const { toCamelCase } = require('./utils');
         },
     });
 
-    if (apps.indexOf(name) !== -1) {
-        console.log(`Sorry, app ${name} already exists`);
-        return;
-    }
-
-    apps.push(name);
+    apps.push({
+        chunk: name,
+        title: name,
+        filename: name,
+    });
 
     fs.writeFileSync(path.join(__dirname, '../apps.json'), JSON.stringify(apps, null, 2) + '\n');
 })();

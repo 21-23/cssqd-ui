@@ -10,7 +10,7 @@ import { init } from '../actions/init-actions';
 
 const { MESSAGE_NAME } = protocol.ui;
 
-const roundPhaseToActionMap = {
+export const roundPhaseToActionMap = {
     [RoundPhase.COUNTDOWN]: startCountdown,
     [RoundPhase.IN_PROGRESS]: startRound,
     [RoundPhase.FINISHED]: finishRound,
