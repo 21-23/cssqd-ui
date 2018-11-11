@@ -1,5 +1,8 @@
-export const ModalContainer = () => (
+import { h } from 'preact';
+
+export const ModalContainer = ({ children }) => (
     <div className="modal-container">
+        {children}
         <style jsx global>{`
             .modal-container {
                 position: absolute;
