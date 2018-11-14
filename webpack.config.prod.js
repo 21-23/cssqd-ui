@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
+const WebpackAutoInjectVersion = require('webpack-auto-inject-version');
 
 const apps = require('./apps.json');
 const baseConfig = require('./webpack.config.base');
@@ -31,9 +32,10 @@ const ownConfig = {
             compress: {
                 screw_ie8: true,
             },
-            comments: false,
             warnings: false,
         }),
+
+        new WebpackAutoInjectVersion(),
     ],
 };
 
