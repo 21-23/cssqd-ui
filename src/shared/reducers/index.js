@@ -3,6 +3,7 @@ import { countdownReducer } from './countdown-reducer';
 import { puzzleReducer } from './puzzle-reducer';
 import { userReducer } from './user-reducer';
 import { initReducer } from './init-reducer';
+import { sessionStateReducer } from './session-state-reducer';
 
 export const sharedReducers = {
     roundPhase: roundPhaseReducer,
@@ -10,4 +11,5 @@ export const sharedReducers = {
     puzzle: puzzleReducer,
     username: userReducer,
     initialized: initReducer,
+    sessionState: sessionStateReducer,
 };
