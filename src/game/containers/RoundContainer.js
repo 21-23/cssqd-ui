@@ -18,6 +18,7 @@ import { highlightedBannedChars } from '../selectors/round-selectors';
 
 import { setSelector } from '../actions/solution-actions';
 import { SocialSharingContainer } from './SocialSharingContainer';
+import { isSessionFinished } from '../../shared/selectors/session-state-selectors';
 
 const PureRound = ({
     roundStarted,
@@ -27,7 +28,7 @@ const PureRound = ({
     selection,
     highlightedBannedChars,
     isCorrect,
-    isLastRound,
+    isSessionFinished,
 }) => (
     <RoundLayout>
         <PearlThreadContainer key="PearlThread" />
@@ -50,12 +51,9 @@ const PureRound = ({
             textFillColor={isCorrect ? '#87c736' : '#f8d940'}
         />
 
-        {isLastRound && roundFinished ? (
-            <SocialSharingContainer key="SocialSharingContainer" />
-        ) : (
-            <MarkupRendererContainer key="MarkupRenderer" actualSelection={selection} />
-        )}
+        {isSessionFinished && <SocialSharingContainer key="SocialSharingContainer" />}
 
+        <MarkupRendererContainer key="MarkupRenderer" actualSelection={selection} />
         <RoundStartCountdownContainer key="RoundStartCountdown" />
     </RoundLayout>
 );
@@ -68,6 +66,7 @@ const RoundContainer = connect(
         selector,
         highlightedBannedChars,
         isCorrect,
+        isSessionFinished,
     }),
     {
         setSelector,

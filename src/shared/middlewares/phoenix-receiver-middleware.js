@@ -4,9 +4,10 @@ import { startCountdown, startRound, finishRound } from '../actions/round-phase-
 import { setTimeRemaining } from '../actions/countdown-actions';
 import { receivePuzzle, receivePuzzlesCount } from '../actions/puzzle-actions';
 import { receiveUser } from '../actions/user-actions';
-import { puzzle } from '../selectors/puzzle-selectors';
+import { puzzle, isLastRound } from '../selectors/puzzle-selectors';
 import * as RoundPhase from '../constants/round-phase';
 import { init } from '../actions/init-actions';
+import { setSessionFinished } from '../actions/session-state-actions';
 
 const { MESSAGE_NAME } = protocol.ui;
 
@@ -34,6 +35,7 @@ export const phoenixReceiverMiddleware = store => next => action => {
             if (message.roundPhase === RoundPhase.COUNTDOWN) {
                 const action = setTimeRemaining(3);
                 store.dispatch(action);
+                store.dispatch(setSessionFinished(false));
             }
 
             if (message.roundPhase === RoundPhase.IN_PROGRESS) {
@@ -41,6 +43,10 @@ export const phoenixReceiverMiddleware = store => next => action => {
                 const action = setTimeRemaining(currentPuzzle.timeLimit);
 
                 store.dispatch(action);
+            }
+
+            if (message.roundPhase === RoundPhase.FINISHED && isLastRound(state)) {
+                store.dispatch(setSessionFinished(true));
             }
             break;
         }
@@ -69,6 +75,7 @@ export const phoenixReceiverMiddleware = store => next => action => {
             });
 
             store.dispatch(action);
+            store.dispatch(setSessionFinished(false));
             break;
         }
 
