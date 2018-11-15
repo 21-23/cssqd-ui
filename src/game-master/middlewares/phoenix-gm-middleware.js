@@ -12,6 +12,9 @@ import {
     syncSolutions,
 } from '../actions/participant-actions';
 
+import { setReadyState } from '../actions/gm-ready-state-actions';
+import * as ReadyState from '../constants/ready-states';
+
 const { MESSAGE_NAME } = protocol.ui;
 
 export const phoenixGMMiddleware = store => next => action => {
@@ -60,6 +63,8 @@ function handleServerMessage(store, message) {
 
     switch (message.name) {
         case MESSAGE_NAME.gameMasterSessionState:
+            store.dispatch(setReadyState(message.sandboxStatus === ReadyState.READY));
+
         case MESSAGE_NAME.score: {
             action = receiveParticipants(message.players);
             break;
@@ -95,7 +100,11 @@ function handleServerMessage(store, message) {
 
         case MESSAGE_NAME.solutionSync: {
             action = syncSolutions(message.solutions);
-            store.dispatch(action);
+            break;
+        }
+
+        case MESSAGE_NAME.sandboxStatus: {
+            action = setReadyState(message.status === 'ready');
             break;
         }
     }

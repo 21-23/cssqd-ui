@@ -17,6 +17,11 @@ const Button = ({ iconLeft, iconRight, text, disabled, onClick }) => (
                 outline: none;
                 font-size: 1em;
                 cursor: pointer;
+                transition: opacity;
+            }
+
+            button[disabled] {
+                opacity: 0.5;
             }
 
             button:hover {
