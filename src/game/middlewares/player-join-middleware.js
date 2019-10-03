@@ -3,7 +3,7 @@ import { protocol, parseMessage } from 'message-factory';
 import { playerJoinFailure } from '../actions/player-join-actions';
 import { init } from '../../shared/actions/init-actions';
 
-const playerJoinMiddleware = () => next => action => {
+const playerJoinMiddleware = store => next => action => {
     if (action.type !== MESSAGE) {
         return next(action);
     }
