@@ -5,4 +5,4 @@ import { AuthButton } from './AuthButton';
 
 storiesOf('AuthButton', module)
     .add('github', () => <AuthButton path="/auth/github" icon="github" />)
-    .add('local', () => <AuthButton path="/auth/qd-auto" icon="database" />);
+    .add('local', () => <AuthButton path="/auth/qdauto" icon="database" />);
