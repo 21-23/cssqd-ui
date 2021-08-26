@@ -7,7 +7,7 @@ const hostname = window.location.hostname;
 const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
 
 const phoenixMiddleware = createPhoenixMiddleware({
-    uri: `${protocol}://${hostname}:3001/`,
+    uri: `${protocol}://${hostname}/ws`,
     timeout: 500,
 });
 
